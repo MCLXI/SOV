@@ -180,7 +180,7 @@ void Intro::pickDataDirectory()
         /* Let the user choose one */
         Intro intro;
         intro.setDataDirectory(dataDirDefaultCurrent);
-        intro.setWindowIcon(QIcon(":icons/motion"));
+        intro.setWindowIcon(QIcon(":icons/sov"));
 
         while(true)
         {
@@ -194,7 +194,7 @@ void Intro::pickDataDirectory()
                 TryCreateDirectory(GUIUtil::qstringToBoostPath(dataDir));
                 break;
             } catch (const fs::filesystem_error&) {
-                QMessageBox::critical(0, tr("Motion Core"),
+                QMessageBox::critical(0, tr("SOV Core"),
                     tr("Error: Specified data directory \"%1\" cannot be created.").arg(dataDir));
                 /* fall through, back to choosing screen */
             }
@@ -204,8 +204,8 @@ void Intro::pickDataDirectory()
         settings.setValue("strDataDirDefault", dataDirDefaultCurrent);
     }
     /* Only override -datadir if different from the default, to make it possible to
-     * override -datadir in the motion.conf file in the default data directory
-     * (to be consistent with motiond behavior)
+     * override -datadir in the sov.conf file in the default data directory
+     * (to be consistent with sovd behavior)
      */
     if(dataDir != dataDirDefaultCurrent)
         SoftSetArg("-datadir", GUIUtil::qstringToBoostPath(dataDir).string()); // use OS locale for path setting

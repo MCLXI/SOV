@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_THREADINTERRUPT_H
-#define MOTION_THREADINTERRUPT_H
+#ifndef SOV_THREADINTERRUPT_H
+#define SOV_THREADINTERRUPT_H
 
 #include <atomic>
 #include <chrono>
@@ -31,4 +31,4 @@ private:
     std::atomic<bool> flag;
 };
 
-#endif //MOTION_THREADINTERRUPT_H
+#endif //SOV_THREADINTERRUPT_H

@@ -14,19 +14,19 @@ else
 LIBUNIVALUE = $(UNIVALUE_LIBS)
 endif
 
-MOTION_CONFIG_INCLUDES=-I$(builddir)/config
-MOTION_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+SOV_CONFIG_INCLUDES=-I$(builddir)/config
+SOV_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
-MOTION_INCLUDES += -I$(srcdir)/secp256k1/include
-MOTION_INCLUDES += $(UNIVALUE_CFLAGS)
+SOV_INCLUDES += -I$(srcdir)/secp256k1/include
+SOV_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBMOTION_SERVER=libmotion_server.a
-LIBMOTION_WALLET=libmotion_wallet.a
-LIBMOTION_COMMON=libmotion_common.a
-LIBMOTION_CLI=libmotion_cli.a
-LIBMOTION_UTIL=libmotion_util.a
-LIBMOTION_CRYPTO=crypto/libmotion_crypto.a
-LIBMOTIONQT=qt/libmotionqt.a
+LIBSOV_SERVER=libsov_server.a
+LIBSOV_WALLET=libsov_wallet.a
+LIBSOV_COMMON=libsov_common.a
+LIBSOV_CLI=libsov_cli.a
+LIBSOV_UTIL=libsov_util.a
+LIBSOV_CRYPTO=crypto/libsov_crypto.a
+LIBSOVQT=qt/libsovqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
@@ -35,41 +35,41 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  crypto/libmotion_crypto.a \
-  libmotion_util.a \
-  libmotion_common.a \
-  libmotion_server.a \
-  libmotion_cli.a
+  crypto/libsov_crypto.a \
+  libsov_util.a \
+  libsov_common.a \
+  libsov_server.a \
+  libsov_cli.a
 if ENABLE_WALLET
-MOTION_INCLUDES += $(BDB_CPPFLAGS)
-EXTRA_LIBRARIES += libmotion_wallet.a
+SOV_INCLUDES += $(BDB_CPPFLAGS)
+EXTRA_LIBRARIES += libsov_wallet.a
 endif
 if ENABLE_ZMQ
-EXTRA_LIBRARIES += libmotion_zmq.a
+EXTRA_LIBRARIES += libsov_zmq.a
 endif
 
-if BUILD_MOTION_LIBS
-lib_LTLIBRARIES = libmotionconsensus.la
-LIBMOTION_CONSENSUS=libmotionconsensus.la
+if BUILD_SOV_LIBS
+lib_LTLIBRARIES = libsovconsensus.la
+LIBSOV_CONSENSUS=libsovconsensus.la
 else
-LIBMOTION_CONSENSUS=
+LIBSOV_CONSENSUS=
 endif
 
 bin_PROGRAMS =
 TESTS =
 BENCHMARKS =
 
-if BUILD_MOTIOND
-  bin_PROGRAMS += motiond
+if BUILD_SOVD
+  bin_PROGRAMS += sovd
 endif
 
-if BUILD_MOTION_UTILS
-  bin_PROGRAMS += motion-cli motion-tx
+if BUILD_SOV_UTILS
+  bin_PROGRAMS += sov-cli sov-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# motion core #
-MOTION_CORE_H = \
+# sov core #
+SOV_CORE_H = \
   addrdb.h \
   activemasternode.h \
   addressindex.h \
@@ -205,12 +205,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh $(abs_top_builddir)/src/obj/build.h \
 	  $(abs_top_srcdir)
-libmotion_util_a-clientversion.$(OBJEXT): obj/build.h
+libsov_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between motiond and motion-qt
-libmotion_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libmotion_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmotion_server_a_SOURCES = \
+# server: shared between sovd and sov-qt
+libsov_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libsov_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libsov_server_a_SOURCES = \
   activemasternode.cpp \
   addrman.cpp \
   addrdb.cpp \
@@ -266,25 +266,25 @@ libmotion_server_a_SOURCES = \
   validation.cpp \
   validationinterface.cpp \
   versionbits.cpp \
-  $(MOTION_CORE_H)
+  $(SOV_CORE_H)
 
 if ENABLE_ZMQ
-LIBMOTION_ZMQ=libmotion_zmq.a
+LIBSOV_ZMQ=libsov_zmq.a
 
-libmotion_zmq_a_CPPFLAGS = $(MOTION_INCLUDES) $(ZMQ_CFLAGS)
-libmotion_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmotion_zmq_a_SOURCES = \
+libsov_zmq_a_CPPFLAGS = $(SOV_INCLUDES) $(ZMQ_CFLAGS)
+libsov_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libsov_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
 endif
 
 
-# wallet: shared between motiond and motion-qt, but only linked
+# wallet: shared between sovd and sov-qt, but only linked
 # when wallet enabled
-libmotion_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES)
-libmotion_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmotion_wallet_a_SOURCES = \
+libsov_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES)
+libsov_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libsov_wallet_a_SOURCES = \
   keepass.cpp \
   privatesend-client.cpp \
   privatesend-util.cpp \
@@ -296,12 +296,12 @@ libmotion_wallet_a_SOURCES = \
   wallet/wallet_ismine.cpp \
   wallet/walletdb.cpp \
   policy/rbf.cpp \
-  $(MOTION_CORE_H)
+  $(SOV_CORE_H)
 
 # crypto primitives library
-crypto_libmotion_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_CONFIG_INCLUDES) $(PIC_FLAGS)
-crypto_libmotion_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(PIC_FLAGS)
-crypto_libmotion_crypto_a_SOURCES = \
+crypto_libsov_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_CONFIG_INCLUDES) $(PIC_FLAGS)
+crypto_libsov_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(PIC_FLAGS)
+crypto_libsov_crypto_a_SOURCES = \
   crypto/common.h \
   crypto/hmac_sha256.cpp \
   crypto/hmac_sha256.h \
@@ -318,7 +318,7 @@ crypto_libmotion_crypto_a_SOURCES = \
   crypto/sha512.h
 
 # x16r
-crypto_libmotion_crypto_a_SOURCES += \
+crypto_libsov_crypto_a_SOURCES += \
   crypto/blake.c \
   crypto/bmw.c \
   crypto/cubehash.c \
@@ -355,10 +355,10 @@ crypto_libmotion_crypto_a_SOURCES += \
   crypto/sph_sha2.h \
   crypto/sph_types.h
 
-# common: shared between motiond, and motion-qt and non-server tools
-libmotion_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES)
-libmotion_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmotion_common_a_SOURCES = \
+# common: shared between sovd, and sov-qt and non-server tools
+libsov_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES)
+libsov_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libsov_common_a_SOURCES = \
   amount.cpp \
   arith_uint256.cpp \
   base58.cpp \
@@ -385,14 +385,14 @@ libmotion_common_a_SOURCES = \
   script/script_error.cpp \
   script/sign.cpp \
   script/standard.cpp \
-  $(MOTION_CORE_H)
+  $(SOV_CORE_H)
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libmotion_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES)
-libmotion_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmotion_util_a_SOURCES = \
+libsov_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES)
+libsov_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libsov_util_a_SOURCES = \
   support/pagelocker.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -409,93 +409,93 @@ libmotion_util_a_SOURCES = \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
-  $(MOTION_CORE_H)
+  $(SOV_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libmotion_util_a_SOURCES += compat/glibc_compat.cpp
+libsov_util_a_SOURCES += compat/glibc_compat.cpp
 endif
 
-# cli: shared between motion-cli and motion-qt
-libmotion_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES)
-libmotion_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmotion_cli_a_SOURCES = \
+# cli: shared between sov-cli and sov-qt
+libsov_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES)
+libsov_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libsov_cli_a_SOURCES = \
   rpc/client.cpp \
-  $(MOTION_CORE_H)
+  $(SOV_CORE_H)
 
-nodist_libmotion_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libsov_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# motiond binary #
-motiond_SOURCES = motiond.cpp
-motiond_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES)
-motiond_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-motiond_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# sovd binary #
+sovd_SOURCES = sovd.cpp
+sovd_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES)
+sovd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+sovd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-motiond_SOURCES += motiond-res.rc
+sovd_SOURCES += sovd-res.rc
 endif
 
-motiond_LDADD = \
-  $(LIBMOTION_SERVER) \
-  $(LIBMOTION_COMMON) \
+sovd_LDADD = \
+  $(LIBSOV_SERVER) \
+  $(LIBSOV_COMMON) \
   $(LIBUNIVALUE) \
-  $(LIBMOTION_UTIL) \
-  $(LIBMOTION_CRYPTO) \
+  $(LIBSOV_UTIL) \
+  $(LIBSOV_CRYPTO) \
   $(LIBLEVELDB) \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
 if ENABLE_ZMQ
-motiond_LDADD += $(LIBMOTION_ZMQ) $(ZMQ_LIBS)
+sovd_LDADD += $(LIBSOV_ZMQ) $(ZMQ_LIBS)
 endif
 
 if ENABLE_WALLET
-motiond_LDADD += libmotion_wallet.a
+sovd_LDADD += libsov_wallet.a
 endif
 
-motiond_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+sovd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
 
-# motion-cli binary #
-motion_cli_SOURCES = motion-cli.cpp
-motion_cli_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES) $(EVENT_CFLAGS)
-motion_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-motion_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# sov-cli binary #
+sov_cli_SOURCES = sov-cli.cpp
+sov_cli_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES) $(EVENT_CFLAGS)
+sov_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+sov_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-motion_cli_SOURCES += motion-cli-res.rc
+sov_cli_SOURCES += sov-cli-res.rc
 endif
 
-motion_cli_LDADD = \
-  $(LIBMOTION_CLI) \
+sov_cli_LDADD = \
+  $(LIBSOV_CLI) \
   $(LIBUNIVALUE) \
-  $(LIBMOTION_UTIL)
-motion_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+  $(LIBSOV_UTIL)
+sov_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# motion-tx binary #
-motion_tx_SOURCES = motion-tx.cpp
-motion_tx_CPPFLAGS = $(AM_CPPFLAGS) $(MOTION_INCLUDES)
-motion_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-motion_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# sov-tx binary #
+sov_tx_SOURCES = sov-tx.cpp
+sov_tx_CPPFLAGS = $(AM_CPPFLAGS) $(SOV_INCLUDES)
+sov_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+sov_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-motion_tx_SOURCES += motion-tx-res.rc
+sov_tx_SOURCES += sov-tx-res.rc
 endif
 
-motion_tx_LDADD = \
+sov_tx_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBMOTION_COMMON) \
-  $(LIBMOTION_UTIL) \
-  $(LIBMOTION_CRYPTO) \
+  $(LIBSOV_COMMON) \
+  $(LIBSOV_UTIL) \
+  $(LIBSOV_CRYPTO) \
   $(LIBSECP256K1)
 
-motion_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+sov_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# motionconsensus library #
-if BUILD_MOTION_LIBS
-include_HEADERS = script/motionconsensus.h
-libmotionconsensus_la_SOURCES = \
+# sovconsensus library #
+if BUILD_SOV_LIBS
+include_HEADERS = script/sovconsensus.h
+libsovconsensus_la_SOURCES = \
   crypto/hmac_sha512.cpp \
   crypto/ripemd160.cpp \
   crypto/sha1.cpp \
@@ -504,20 +504,20 @@ libmotionconsensus_la_SOURCES = \
   hash.cpp \
   primitives/transaction.cpp \
   pubkey.cpp \
-  script/motionconsensus.cpp \
+  script/sovconsensus.cpp \
   script/interpreter.cpp \
   script/script.cpp \
   uint256.cpp \
   utilstrencodings.cpp
 
 if GLIBC_BACK_COMPAT
-  libmotionconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libsovconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libmotionconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libmotionconsensus_la_LIBADD = $(LIBSECP256K1)
-libmotionconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_MOTION_INTERNAL
-libmotionconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libsovconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libsovconsensus_la_LIBADD = $(LIBSECP256K1)
+libsovconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_SOV_INTERNAL
+libsovconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #

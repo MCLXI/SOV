@@ -9,11 +9,11 @@
 
 import time
 
-from test_framework.test_framework import MotionTestFramework
+from test_framework.test_framework import SOVTestFramework
 from test_framework.util import *
 
 
-class TimestampIndexTest(MotionTestFramework):
+class TimestampIndexTest(SOVTestFramework):
 
     def setup_chain(self):
         print("Initializing test directory "+self.options.tmpdir)

@@ -2,34 +2,34 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_QT_MOTIONADDRESSVALIDATOR_H
-#define MOTION_QT_MOTIONADDRESSVALIDATOR_H
+#ifndef SOV_QT_SOVADDRESSVALIDATOR_H
+#define SOV_QT_SOVADDRESSVALIDATOR_H
 
 #include <QValidator>
 
 /** Base58 entry widget validator, checks for valid characters and
  * removes some whitespace.
  */
-class MotionAddressEntryValidator : public QValidator
+class SOVAddressEntryValidator : public QValidator
 {
     Q_OBJECT
 
 public:
-    explicit MotionAddressEntryValidator(QObject *parent);
+    explicit SOVAddressEntryValidator(QObject *parent);
 
     State validate(QString &input, int &pos) const;
 };
 
-/** Motion address widget validator, checks for a valid motion address.
+/** SOV address widget validator, checks for a valid sov address.
  */
-class MotionAddressCheckValidator : public QValidator
+class SOVAddressCheckValidator : public QValidator
 {
     Q_OBJECT
 
 public:
-    explicit MotionAddressCheckValidator(QObject *parent);
+    explicit SOVAddressCheckValidator(QObject *parent);
 
     State validate(QString &input, int &pos) const;
 };
 
-#endif // MOTION_QT_MOTIONADDRESSVALIDATOR_H
+#endif // SOV_QT_SOVADDRESSVALIDATOR_H

@@ -5,10 +5,10 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/motion-config.h"
+#include "config/sov-config.h"
 #endif
 
-#include "motiongui.h"
+#include "sovgui.h"
 
 #include "chainparams.h"
 #include "clientmodel.h"
@@ -96,7 +96,7 @@ static void InitMessage(const std::string &message)
  */
 static std::string Translate(const char* psz)
 {
-    return QCoreApplication::translate("motion-core", psz).toStdString();
+    return QCoreApplication::translate("sov-core", psz).toStdString();
 }
 
 static QString GetLangTerritory()
@@ -143,11 +143,11 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
     if (qtTranslator.load("qt_" + lang_territory, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         QApplication::installTranslator(&qtTranslator);
 
-    // Load e.g. motion_de.qm (shortcut "de" needs to be defined in motion.qrc)
+    // Load e.g. sov_de.qm (shortcut "de" needs to be defined in sov.qrc)
     if (translatorBase.load(lang, ":/translations/"))
         QApplication::installTranslator(&translatorBase);
 
-    // Load e.g. motion_de_DE.qm (shortcut "de_DE" needs to be defined in motion.qrc)
+    // Load e.g. sov_de_DE.qm (shortcut "de_DE" needs to be defined in sov.qrc)
     if (translator.load(lang_territory, ":/translations/"))
         QApplication::installTranslator(&translator);
 }
@@ -168,14 +168,14 @@ void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, cons
 }
 #endif
 
-/** Class encapsulating Motion startup and shutdown.
+/** Class encapsulating SOV startup and shutdown.
  * Allows running startup and shutdown in a different thread from the UI thread.
  */
-class MotionCore: public QObject
+class SOVCore: public QObject
 {
     Q_OBJECT
 public:
-    explicit MotionCore();
+    explicit SOVCore();
 
 public Q_SLOTS:
     void initialize();
@@ -198,13 +198,13 @@ private:
     void handleRunawayException(const std::exception *e);
 };
 
-/** Main Motion application object */
-class MotionApplication: public QApplication
+/** Main SOV application object */
+class SOVApplication: public QApplication
 {
     Q_OBJECT
 public:
-    explicit MotionApplication(int &argc, char **argv);
-    ~MotionApplication();
+    explicit SOVApplication(int &argc, char **argv);
+    ~SOVApplication();
 
 #ifdef ENABLE_WALLET
     /// Create payment server
@@ -227,7 +227,7 @@ public:
     /// Get process return value
     int getReturnValue() { return returnValue; }
 
-    /// Get window identifier of QMainWindow (MotionGUI)
+    /// Get window identifier of QMainWindow (SOVGUI)
     WId getMainWinId() const;
 
 public Q_SLOTS:
@@ -247,7 +247,7 @@ private:
     QThread *coreThread;
     OptionsModel *optionsModel;
     ClientModel *clientModel;
-    MotionGUI *window;
+    SOVGUI *window;
     QTimer *pollShutdownTimer;
 #ifdef ENABLE_WALLET
     PaymentServer* paymentServer;
@@ -260,20 +260,20 @@ private:
     void startThread();
 };
 
-#include "motion.moc"
+#include "sov.moc"
 
-MotionCore::MotionCore():
+SOVCore::SOVCore():
     QObject()
 {
 }
 
-void MotionCore::handleRunawayException(const std::exception *e)
+void SOVCore::handleRunawayException(const std::exception *e)
 {
     PrintExceptionContinue(e, "Runaway exception");
     Q_EMIT runawayException(QString::fromStdString(strMiscWarning));
 }
 
-void MotionCore::initialize()
+void SOVCore::initialize()
 {
     execute_restart = true;
 
@@ -289,7 +289,7 @@ void MotionCore::initialize()
     }
 }
 
-void MotionCore::restart(QStringList args)
+void SOVCore::restart(QStringList args)
 {
     if(execute_restart) { // Only restart 1x, no matter how often a user clicks on a restart-button
         execute_restart = false;
@@ -313,7 +313,7 @@ void MotionCore::restart(QStringList args)
     }
 }
 
-void MotionCore::shutdown()
+void SOVCore::shutdown()
 {
     try
     {
@@ -330,7 +330,7 @@ void MotionCore::shutdown()
     }
 }
 
-MotionApplication::MotionApplication(int &argc, char **argv):
+SOVApplication::SOVApplication(int &argc, char **argv):
     QApplication(argc, argv),
     coreThread(0),
     optionsModel(0),
@@ -346,17 +346,17 @@ MotionApplication::MotionApplication(int &argc, char **argv):
     setQuitOnLastWindowClosed(false);
 
     // UI per-platform customization
-    // This must be done inside the MotionApplication constructor, or after it, because
+    // This must be done inside the SOVApplication constructor, or after it, because
     // PlatformStyle::instantiate requires a QApplication
     std::string platformName;
-    platformName = GetArg("-uiplatform", MotionGUI::DEFAULT_UIPLATFORM);
+    platformName = GetArg("-uiplatform", SOVGUI::DEFAULT_UIPLATFORM);
     platformStyle = PlatformStyle::instantiate(QString::fromStdString(platformName));
     if (!platformStyle) // Fall back to "other" if specified name not found
         platformStyle = PlatformStyle::instantiate("other");
     assert(platformStyle);
 }
 
-MotionApplication::~MotionApplication()
+SOVApplication::~SOVApplication()
 {
     if(coreThread)
     {
@@ -385,27 +385,27 @@ MotionApplication::~MotionApplication()
 }
 
 #ifdef ENABLE_WALLET
-void MotionApplication::createPaymentServer()
+void SOVApplication::createPaymentServer()
 {
     paymentServer = new PaymentServer(this);
 }
 #endif
 
-void MotionApplication::createOptionsModel(bool resetSettings)
+void SOVApplication::createOptionsModel(bool resetSettings)
 {
     optionsModel = new OptionsModel(NULL, resetSettings);
 }
 
-void MotionApplication::createWindow(const NetworkStyle *networkStyle)
+void SOVApplication::createWindow(const NetworkStyle *networkStyle)
 {
-    window = new MotionGUI(platformStyle, networkStyle, 0);
+    window = new SOVGUI(platformStyle, networkStyle, 0);
 
     pollShutdownTimer = new QTimer(window);
     connect(pollShutdownTimer, SIGNAL(timeout()), window, SLOT(detectShutdown()));
     pollShutdownTimer->start(200);
 }
 
-void MotionApplication::createSplashScreen(const NetworkStyle *networkStyle)
+void SOVApplication::createSplashScreen(const NetworkStyle *networkStyle)
 {
     SplashScreen *splash = new SplashScreen(0, networkStyle);
     // We don't hold a direct pointer to the splash screen after creation, but the splash
@@ -415,12 +415,12 @@ void MotionApplication::createSplashScreen(const NetworkStyle *networkStyle)
     connect(this, SIGNAL(requestedShutdown()), splash, SLOT(close()));
 }
 
-void MotionApplication::startThread()
+void SOVApplication::startThread()
 {
     if(coreThread)
         return;
     coreThread = new QThread(this);
-    MotionCore *executor = new MotionCore();
+    SOVCore *executor = new SOVCore();
     executor->moveToThread(coreThread);
 
     /*  communication to and from thread */
@@ -437,20 +437,20 @@ void MotionApplication::startThread()
     coreThread->start();
 }
 
-void MotionApplication::parameterSetup()
+void SOVApplication::parameterSetup()
 {
     InitLogging();
     InitParameterInteraction();
 }
 
-void MotionApplication::requestInitialize()
+void SOVApplication::requestInitialize()
 {
     qDebug() << __func__ << ": Requesting initialize";
     startThread();
     Q_EMIT requestedInitialize();
 }
 
-void MotionApplication::requestShutdown()
+void SOVApplication::requestShutdown()
 {
     // Show a simple window indicating shutdown status
     // Do this first as some of the steps may take some time below,
@@ -475,7 +475,7 @@ void MotionApplication::requestShutdown()
     Q_EMIT requestedShutdown();
 }
 
-void MotionApplication::initializeResult(int retval)
+void SOVApplication::initializeResult(int retval)
 {
     qDebug() << __func__ << ": Initialization result: " << retval;
     // Set exit result: 0 if successful, 1 if failure
@@ -497,8 +497,8 @@ void MotionApplication::initializeResult(int retval)
         {
             walletModel = new WalletModel(platformStyle, pwalletMain, optionsModel);
 
-            window->addWallet(MotionGUI::DEFAULT_WALLET, walletModel);
-            window->setCurrentWallet(MotionGUI::DEFAULT_WALLET);
+            window->addWallet(SOVGUI::DEFAULT_WALLET, walletModel);
+            window->setCurrentWallet(SOVGUI::DEFAULT_WALLET);
 
             connect(walletModel, SIGNAL(coinsSent(CWallet*,SendCoinsRecipient,QByteArray)),
                              paymentServer, SLOT(fetchPaymentACK(CWallet*,const SendCoinsRecipient&,QByteArray)));
@@ -518,7 +518,7 @@ void MotionApplication::initializeResult(int retval)
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // motion: URIs or payment requests:
+        // sov: URIs or payment requests:
         connect(paymentServer, SIGNAL(receivedPaymentRequest(SendCoinsRecipient)),
                          window, SLOT(handlePaymentRequest(SendCoinsRecipient)));
         connect(window, SIGNAL(receivedURI(QString)),
@@ -532,19 +532,19 @@ void MotionApplication::initializeResult(int retval)
     }
 }
 
-void MotionApplication::shutdownResult(int retval)
+void SOVApplication::shutdownResult(int retval)
 {
     qDebug() << __func__ << ": Shutdown result: " << retval;
     quit(); // Exit main loop after shutdown finished
 }
 
-void MotionApplication::handleRunawayException(const QString &message)
+void SOVApplication::handleRunawayException(const QString &message)
 {
-    QMessageBox::critical(0, "Runaway exception", MotionGUI::tr("A fatal error occurred. Motion can no longer continue safely and will quit.") + QString("\n\n") + message);
+    QMessageBox::critical(0, "Runaway exception", SOVGUI::tr("A fatal error occurred. SOV can no longer continue safely and will quit.") + QString("\n\n") + message);
     ::exit(EXIT_FAILURE);
 }
 
-WId MotionApplication::getMainWinId() const
+WId SOVApplication::getMainWinId() const
 {
     if (!window)
         return 0;
@@ -570,10 +570,10 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE(motion);
-    Q_INIT_RESOURCE(motion_locale);
+    Q_INIT_RESOURCE(sov);
+    Q_INIT_RESOURCE(sov_locale);
 
-    MotionApplication app(argc, argv);
+    SOVApplication app(argc, argv);
 #if QT_VERSION > 0x050100
     // Generate high-dpi pixmaps
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -622,18 +622,18 @@ int main(int argc, char *argv[])
     // User language is set up: pick a data directory
     Intro::pickDataDirectory();
 
-    /// 6. Determine availability of data directory and parse motion.conf
+    /// 6. Determine availability of data directory and parse sov.conf
     /// - Do not call GetDataDir(true) before this step finishes
     if (!boost::filesystem::is_directory(GetDataDir(false)))
     {
-        QMessageBox::critical(0, QObject::tr("Motion"),
+        QMessageBox::critical(0, QObject::tr("SOV"),
                               QObject::tr("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
         return EXIT_FAILURE;
     }
     try {
         ReadConfigFile(mapArgs, mapMultiArgs);
     } catch (const std::exception& e) {
-        QMessageBox::critical(0, QObject::tr("Motion"),
+        QMessageBox::critical(0, QObject::tr("SOV"),
                               QObject::tr("Error: Cannot parse configuration file: %1. Only use key=value syntax.").arg(e.what()));
         return EXIT_FAILURE;
     }
@@ -648,7 +648,7 @@ int main(int argc, char *argv[])
     try {
         SelectParams(ChainNameFromCommandLine());
     } catch(std::exception &e) {
-        QMessageBox::critical(0, QObject::tr("Motion"), QObject::tr("Error: %1").arg(e.what()));
+        QMessageBox::critical(0, QObject::tr("SOV"), QObject::tr("Error: %1").arg(e.what()));
         return EXIT_FAILURE;
     }
 #ifdef ENABLE_WALLET
@@ -667,7 +667,7 @@ int main(int argc, char *argv[])
     /// 7a. parse masternode.conf
     std::string strErr;
     if(!masternodeConfig.read(strErr)) {
-        QMessageBox::critical(0, QObject::tr("Motion"),
+        QMessageBox::critical(0, QObject::tr("SOV"),
                               QObject::tr("Error reading masternode configuration file: %1").arg(strErr.c_str()));
         return EXIT_FAILURE;
     }
@@ -682,7 +682,7 @@ int main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // motion: links repeatedly have their payment requests routed to this process:
+    // sov: links repeatedly have their payment requests routed to this process:
     app.createPaymentServer();
 #endif
 
@@ -716,7 +716,7 @@ int main(int argc, char *argv[])
         app.createWindow(networkStyle.data());
         app.requestInitialize();
 #if defined(Q_OS_WIN) && QT_VERSION >= 0x050000
-        WinShutdownMonitor::registerShutdownBlockReason(QObject::tr("Motion didn't yet exit safely..."), (HWND)app.getMainWinId());
+        WinShutdownMonitor::registerShutdownBlockReason(QObject::tr("SOV didn't yet exit safely..."), (HWND)app.getMainWinId());
 #endif
         app.exec();
         app.requestShutdown();

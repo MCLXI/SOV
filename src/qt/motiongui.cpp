@@ -4,9 +4,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "motiongui.h"
+#include "sovgui.h"
 
-#include "motionunits.h"
+#include "sovunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -68,7 +68,7 @@
 #include <QUrlQuery>
 #endif
 
-const std::string MotionGUI::DEFAULT_UIPLATFORM =
+const std::string SOVGUI::DEFAULT_UIPLATFORM =
 #if defined(Q_OS_MAC)
         "macosx"
 #elif defined(Q_OS_WIN)
@@ -78,9 +78,9 @@ const std::string MotionGUI::DEFAULT_UIPLATFORM =
 #endif
         ;
 
-const QString MotionGUI::DEFAULT_WALLET = "~Default";
+const QString SOVGUI::DEFAULT_WALLET = "~Default";
 
-MotionGUI::MotionGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
+SOVGUI::SOVGUI(const PlatformStyle *platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
     QMainWindow(parent),
     clientModel(0),
     walletFrame(0),
@@ -134,7 +134,7 @@ MotionGUI::MotionGUI(const PlatformStyle *platformStyle, const NetworkStyle *net
 
     GUIUtil::restoreWindowGeometry("nWindow", QSize(850, 550), this);
 
-    QString windowTitle = tr("Motion") + " - ";
+    QString windowTitle = tr("SOV") + " - ";
 #ifdef ENABLE_WALLET
     /* if compiled with wallet support, -disablewallet can still disable the wallet */
     enableWallet = !GetBoolArg("-disablewallet", false);
@@ -229,7 +229,7 @@ MotionGUI::MotionGUI(const PlatformStyle *platformStyle, const NetworkStyle *net
     
     QHBoxLayout *layoutLogo = new QHBoxLayout;
     QSpacerItem *horizontalSpacerLeft = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-    QPixmap pixmapLogo(":/images/light/motion_logo_horizontal");
+    QPixmap pixmapLogo(":/images/light/sov_logo_horizontal");
     statusbar->setObjectName(QStringLiteral("frameLogo"));
     QSpacerItem *horizontalSpacerRight = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     QLabel *labelLogo = new QLabel;
@@ -279,7 +279,7 @@ MotionGUI::MotionGUI(const PlatformStyle *platformStyle, const NetworkStyle *net
 #endif
 }
 
-MotionGUI::~MotionGUI()
+SOVGUI::~SOVGUI()
 {
     // Unsubscribe from notifications from core
     unsubscribeFromCoreSignals();
@@ -295,7 +295,7 @@ MotionGUI::~MotionGUI()
     delete rpcConsole;
 }
 
-void MotionGUI::createActions()
+void SOVGUI::createActions()
 {
     QActionGroup *tabGroup = new QActionGroup(this);
 
@@ -312,7 +312,7 @@ void MotionGUI::createActions()
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(QIcon(":/icons/" + theme + "/send"), tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a Motion address"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a SOV address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
 #ifdef Q_OS_MAC
@@ -327,7 +327,7 @@ void MotionGUI::createActions()
     sendCoinsMenuAction->setToolTip(sendCoinsMenuAction->statusTip());
 
     receiveCoinsAction = new QAction(QIcon(":/icons/" + theme + "/receiving_addresses"), tr("&Receive"), this);
-    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and motion: URIs)"));
+    receiveCoinsAction->setStatusTip(tr("Request payments (generates QR codes and sov: URIs)"));
     receiveCoinsAction->setToolTip(receiveCoinsAction->statusTip());
     receiveCoinsAction->setCheckable(true);
 #ifdef Q_OS_MAC
@@ -420,15 +420,15 @@ void MotionGUI::createActions()
     quitAction->setStatusTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
-    aboutAction = new QAction(tr("&About Motion"), this);
-    aboutAction->setStatusTip(tr("Show information about Motion"));
+    aboutAction = new QAction(tr("&About SOV"), this);
+    aboutAction->setStatusTip(tr("Show information about SOV"));
     aboutAction->setMenuRole(QAction::AboutRole);
     aboutAction->setEnabled(false);
     aboutQtAction = new QAction(tr("About &Qt"), this);
     aboutQtAction->setStatusTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction("Settings...", this);
-    optionsAction->setStatusTip(tr("Modify configuration options for Motion"));
+    optionsAction->setStatusTip(tr("Modify configuration options for SOV"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
     optionsAction->setEnabled(false);
     toggleHideAction = new QAction(tr("&Show / Hide"), this);
@@ -445,9 +445,9 @@ void MotionGUI::createActions()
     unlockWalletAction->setToolTip(tr("Unlock wallet"));
     lockWalletAction = new QAction(tr("&Lock Wallet"), this);
     signMessageAction = new QAction(tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your Motion addresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your SOV addresses to prove you own them"));
     verifyMessageAction = new QAction(tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Motion addresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified SOV addresses"));
 
     openInfoAction = new QAction(tr("&Information"), this);
     openInfoAction->setStatusTip(tr("Show diagnostic information"));
@@ -478,11 +478,11 @@ void MotionGUI::createActions()
     usedReceivingAddressesAction->setStatusTip(tr("Show the list of used receiving addresses and labels"));
 
     openAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_DirOpenIcon), tr("Open &URI..."), this);
-    openAction->setStatusTip(tr("Open a motion: URI or payment request"));
+    openAction->setStatusTip(tr("Open a sov: URI or payment request"));
 
     showHelpMessageAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Command-line options"), this);
     showHelpMessageAction->setMenuRole(QAction::NoRole);
-    showHelpMessageAction->setStatusTip(tr("Show the Motion help message to get a list with possible Motion command-line options"));
+    showHelpMessageAction->setStatusTip(tr("Show the SOV help message to get a list with possible SOV command-line options"));
 
     showPrivateSendHelpAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&PrivateSend information"), this);
     showPrivateSendHelpAction->setMenuRole(QAction::NoRole);
@@ -545,7 +545,7 @@ void MotionGUI::createActions()
 }
 
 
-void MotionGUI::createToolBars(QWidget* statusbar)
+void SOVGUI::createToolBars(QWidget* statusbar)
 {
     if(walletFrame)
     {
@@ -584,7 +584,7 @@ void MotionGUI::createToolBars(QWidget* statusbar)
     }
 }
 
-void MotionGUI::setClientModel(ClientModel *clientModel)
+void SOVGUI::setClientModel(ClientModel *clientModel)
 {
     this->clientModel = clientModel;
     if(clientModel)
@@ -674,7 +674,7 @@ void MotionGUI::setClientModel(ClientModel *clientModel)
 }
 
 #ifdef ENABLE_WALLET
-bool MotionGUI::addWallet(const QString& name, WalletModel *walletModel)
+bool SOVGUI::addWallet(const QString& name, WalletModel *walletModel)
 {
     if(!walletFrame)
         return false;
@@ -682,14 +682,14 @@ bool MotionGUI::addWallet(const QString& name, WalletModel *walletModel)
     return walletFrame->addWallet(name, walletModel);
 }
 
-bool MotionGUI::setCurrentWallet(const QString& name)
+bool SOVGUI::setCurrentWallet(const QString& name)
 {
     if(!walletFrame)
         return false;
     return walletFrame->setCurrentWallet(name);
 }
 
-void MotionGUI::removeAllWallets()
+void SOVGUI::removeAllWallets()
 {
     if(!walletFrame)
         return;
@@ -698,7 +698,7 @@ void MotionGUI::removeAllWallets()
 }
 #endif // ENABLE_WALLET
 
-void MotionGUI::setWalletActionsEnabled(bool enabled)
+void SOVGUI::setWalletActionsEnabled(bool enabled)
 {
     overviewAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
@@ -721,17 +721,17 @@ void MotionGUI::setWalletActionsEnabled(bool enabled)
     openAction->setEnabled(enabled);
 }
 
-void MotionGUI::createTrayIcon(const NetworkStyle *networkStyle)
+void SOVGUI::createTrayIcon(const NetworkStyle *networkStyle)
 {
     trayIcon = new QSystemTrayIcon(this);
-    QString toolTip = tr("Motion client") + " " + networkStyle->getTitleAddText();
+    QString toolTip = tr("SOV client") + " " + networkStyle->getTitleAddText();
     trayIcon->setToolTip(toolTip);
     trayIcon->setIcon(networkStyle->getTrayAndWindowIcon());
     trayIcon->hide();
     notificator = new Notificator(QApplication::applicationName(), trayIcon, this);
 }
 
-void MotionGUI::createIconMenu(QMenu *pmenu)
+void SOVGUI::createIconMenu(QMenu *pmenu)
 {
     // Configuration of the tray icon (or dock icon) icon menu
     pmenu->addAction(toggleHideAction);
@@ -760,7 +760,7 @@ void MotionGUI::createIconMenu(QMenu *pmenu)
 }
 
 #ifndef Q_OS_MAC
-void MotionGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
+void SOVGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if(reason == QSystemTrayIcon::Trigger)
     {
@@ -770,7 +770,7 @@ void MotionGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 }
 #endif
 
-void MotionGUI::optionsClicked()
+void SOVGUI::optionsClicked()
 {
     if(!clientModel || !clientModel->getOptionsModel())
         return;
@@ -780,7 +780,7 @@ void MotionGUI::optionsClicked()
     dlg.exec();
 }
 
-void MotionGUI::aboutClicked()
+void SOVGUI::aboutClicked()
 {
     if(!clientModel)
         return;
@@ -789,7 +789,7 @@ void MotionGUI::aboutClicked()
     dlg.exec();
 }
 
-void MotionGUI::showDebugWindow()
+void SOVGUI::showDebugWindow()
 {
     rpcConsole->showNormal();
     rpcConsole->show();
@@ -797,57 +797,57 @@ void MotionGUI::showDebugWindow()
     rpcConsole->activateWindow();
 }
 
-void MotionGUI::showInfo()
+void SOVGUI::showInfo()
 {
     toolsAction->setChecked(true);
     walletFrame->gotoToolsPageTab(ToolsPage::TAB_INFO);
 }
 
-void MotionGUI::showConsole()
+void SOVGUI::showConsole()
 {
     toolsAction->setChecked(true);
     walletFrame->gotoToolsPageTab(ToolsPage::TAB_CONSOLE);
 }
 
-void MotionGUI::showGraph()
+void SOVGUI::showGraph()
 {
     toolsAction->setChecked(true);
     walletFrame->gotoToolsPageTab(ToolsPage::TAB_GRAPH);
 }
 
-void MotionGUI::showPeers()
+void SOVGUI::showPeers()
 {
     toolsAction->setChecked(true);
     walletFrame->gotoToolsPageTab(ToolsPage::TAB_PEERS);
 }
 
-void MotionGUI::showRepair()
+void SOVGUI::showRepair()
 {
     toolsAction->setChecked(true);
     walletFrame->gotoToolsPageTab(ToolsPage::TAB_REPAIR);
 }
 
-void MotionGUI::showConfEditor()
+void SOVGUI::showConfEditor()
 {
     GUIUtil::openConfigfile();
 }
 
-void MotionGUI::showMNConfEditor()
+void SOVGUI::showMNConfEditor()
 {
     GUIUtil::openMNConfigfile();
 }
 
-void MotionGUI::showBackups()
+void SOVGUI::showBackups()
 {
     GUIUtil::showBackups();
 }
 
-void MotionGUI::showHelpMessageClicked()
+void SOVGUI::showHelpMessageClicked()
 {
     helpMessageDialog->show();
 }
 
-void MotionGUI::showPrivateSendHelpClicked()
+void SOVGUI::showPrivateSendHelpClicked()
 {
     if(!clientModel)
         return;
@@ -857,7 +857,7 @@ void MotionGUI::showPrivateSendHelpClicked()
 }
 
 #ifdef ENABLE_WALLET
-void MotionGUI::openClicked()
+void SOVGUI::openClicked()
 {
     OpenURIDialog dlg(this);
     if(dlg.exec())
@@ -866,31 +866,31 @@ void MotionGUI::openClicked()
     }
 }
 
-void MotionGUI::gotoOverviewPage()
+void SOVGUI::gotoOverviewPage()
 {
     overviewAction->setChecked(true);
     if (walletFrame) walletFrame->gotoOverviewPage();
 }
 
-void MotionGUI::gotoHistoryPage()
+void SOVGUI::gotoHistoryPage()
 {
     historyAction->setChecked(true);
     if (walletFrame) walletFrame->gotoHistoryPage();
 }
 
-void MotionGUI::gotoSettingsPage() 
+void SOVGUI::gotoSettingsPage() 
 {
     settingsAction->setChecked(true);
     if(walletFrame) walletFrame->gotoSettingsPage();
 }
 
-void MotionGUI::gotoToolsPage()
+void SOVGUI::gotoToolsPage()
 {
     toolsAction->setChecked(true);
     if(toolsAction) walletFrame->gotoToolsPage();
 }
 
-void MotionGUI::gotoMasternodePage()
+void SOVGUI::gotoMasternodePage()
 {
     QSettings settings;
     if (settings.value("fShowMasternodesTab").toBool()) {
@@ -899,30 +899,30 @@ void MotionGUI::gotoMasternodePage()
     }
 }
 
-void MotionGUI::gotoReceiveCoinsPage()
+void SOVGUI::gotoReceiveCoinsPage()
 {
     receiveCoinsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoReceiveCoinsPage();
 }
 
-void MotionGUI::gotoSendCoinsPage(QString addr)
+void SOVGUI::gotoSendCoinsPage(QString addr)
 {
     sendCoinsAction->setChecked(true);
     if (walletFrame) walletFrame->gotoSendCoinsPage(addr);
 }
 
-void MotionGUI::gotoSignMessageTab(QString addr)
+void SOVGUI::gotoSignMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoSignMessageTab(addr);
 }
 
-void MotionGUI::gotoVerifyMessageTab(QString addr)
+void SOVGUI::gotoVerifyMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
 }
 #endif // ENABLE_WALLET
 
-void MotionGUI::updateNetworkState()
+void SOVGUI::updateNetworkState()
 {
     int count = clientModel->getNumConnections();
     QString icon;
@@ -937,7 +937,7 @@ void MotionGUI::updateNetworkState()
     }
 
     if (clientModel->getNetworkActive()) {
-        labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Motion network", "", count));
+        labelConnectionsIcon->setToolTip(tr("%n active connection(s) to SOV network", "", count));
     } else {
         labelConnectionsIcon->setToolTip(tr("Network activity disabled"));
         icon = ":/icons/" + theme + "/network_disabled";
@@ -946,17 +946,17 @@ void MotionGUI::updateNetworkState()
     labelConnectionsIcon->setPixmap(platformStyle->SingleColorIcon(icon).pixmap(32, 32));
 }
 
-void MotionGUI::setNumConnections(int count)
+void SOVGUI::setNumConnections(int count)
 {
     updateNetworkState();
 }
 
-void MotionGUI::setNetworkActive(bool networkActive)
+void SOVGUI::setNetworkActive(bool networkActive)
 {
     updateNetworkState();
 }
 
-void MotionGUI::updateHeadersSyncProgressLabel()
+void SOVGUI::updateHeadersSyncProgressLabel()
 {
     int64_t headersTipTime = clientModel->getHeaderTipTime();
     int headersTipHeight = clientModel->getHeaderTipHeight();
@@ -965,7 +965,7 @@ void MotionGUI::updateHeadersSyncProgressLabel()
         progressBarLabel->setText(tr("Syncing Headers (%1%)...").arg(QString::number(100.0 / (headersTipHeight+estHeadersLeft)*headersTipHeight, 'f', 1)));
 }
 
-void MotionGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool header)
+void SOVGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool header)
 {
     if (modalOverlay)
     {
@@ -1023,7 +1023,7 @@ void MotionGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVeri
 #ifdef ENABLE_WALLET
     if (walletFrame)
     {
-        if(secs < 25*60) // 90*60 in motion
+        if(secs < 25*60) // 90*60 in sov
         {
             modalOverlay->showHide(true, true);
             // TODO instead of hiding it forever, we should add meaningful information about MN sync to the overlay
@@ -1077,7 +1077,7 @@ void MotionGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVeri
     progressBar->setToolTip(tooltip);
 }
 
-void MotionGUI::setAdditionalDataSyncProgress(double nSyncProgress)
+void SOVGUI::setAdditionalDataSyncProgress(double nSyncProgress)
 {
     if(!clientModel)
         return;
@@ -1133,9 +1133,9 @@ void MotionGUI::setAdditionalDataSyncProgress(double nSyncProgress)
     progressBar->setToolTip(tooltip);
 }
 
-void MotionGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
+void SOVGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
 {
-    QString strTitle = tr("Motion"); // default title
+    QString strTitle = tr("SOV"); // default title
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;
@@ -1161,7 +1161,7 @@ void MotionGUI::message(const QString &title, const QString &message, unsigned i
             break;
         }
     }
-    // Append title to "Motion - "
+    // Append title to "SOV - "
     if (!msgType.isEmpty())
         strTitle += " - " + msgType;
 
@@ -1192,7 +1192,7 @@ void MotionGUI::message(const QString &title, const QString &message, unsigned i
         notificator->notify((Notificator::Class)nNotifyIcon, strTitle, message);
 }
 
-void MotionGUI::changeEvent(QEvent *e)
+void SOVGUI::changeEvent(QEvent *e)
 {
     QMainWindow::changeEvent(e);
 #ifndef Q_OS_MAC // Ignored on Mac
@@ -1211,7 +1211,7 @@ void MotionGUI::changeEvent(QEvent *e)
 #endif
 }
 
-void MotionGUI::closeEvent(QCloseEvent *event)
+void SOVGUI::closeEvent(QCloseEvent *event)
 {
 #ifndef Q_OS_MAC // Ignored on Mac
     if(clientModel && clientModel->getOptionsModel())
@@ -1228,7 +1228,7 @@ void MotionGUI::closeEvent(QCloseEvent *event)
     QMainWindow::closeEvent(event);
 }
 
-void MotionGUI::showEvent(QShowEvent *event)
+void SOVGUI::showEvent(QShowEvent *event)
 {
     // enable the debug window when the main window shows up
     openInfoAction->setEnabled(true);
@@ -1241,11 +1241,11 @@ void MotionGUI::showEvent(QShowEvent *event)
 }
 
 #ifdef ENABLE_WALLET
-void MotionGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label)
+void SOVGUI::incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address, const QString& label)
 {
     // On new transaction, make an info balloon
     QString msg = tr("Date: %1\n").arg(date) +
-                  tr("Amount: %1\n").arg(MotionUnits::formatWithUnit(unit, amount, true)) +
+                  tr("Amount: %1\n").arg(SOVUnits::formatWithUnit(unit, amount, true)) +
                   tr("Type: %1\n").arg(type);
     if (!label.isEmpty())
         msg += tr("Label: %1\n").arg(label);
@@ -1256,14 +1256,14 @@ void MotionGUI::incomingTransaction(const QString& date, int unit, const CAmount
 }
 #endif // ENABLE_WALLET
 
-void MotionGUI::dragEnterEvent(QDragEnterEvent *event)
+void SOVGUI::dragEnterEvent(QDragEnterEvent *event)
 {
     // Accept only URIs
     if(event->mimeData()->hasUrls())
         event->acceptProposedAction();
 }
 
-void MotionGUI::dropEvent(QDropEvent *event)
+void SOVGUI::dropEvent(QDropEvent *event)
 {
     if(event->mimeData()->hasUrls())
     {
@@ -1275,7 +1275,7 @@ void MotionGUI::dropEvent(QDropEvent *event)
     event->acceptProposedAction();
 }
 
-bool MotionGUI::eventFilter(QObject *object, QEvent *event)
+bool SOVGUI::eventFilter(QObject *object, QEvent *event)
 {
     // Catch status tip events
     if (event->type() == QEvent::StatusTip)
@@ -1288,7 +1288,7 @@ bool MotionGUI::eventFilter(QObject *object, QEvent *event)
 }
 
 #ifdef ENABLE_WALLET
-bool MotionGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
+bool SOVGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
 {
     // URI has to be valid
     if (walletFrame && walletFrame->handlePaymentRequest(recipient))
@@ -1300,7 +1300,7 @@ bool MotionGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
     return false;
 }
 
-void MotionGUI::setHDStatus(int hdEnabled)
+void SOVGUI::setHDStatus(int hdEnabled)
 {
     QString theme = GUIUtil::getThemeName();
 
@@ -1311,7 +1311,7 @@ void MotionGUI::setHDStatus(int hdEnabled)
     labelWalletHDStatusIcon->setEnabled(hdEnabled);
 }
 
-void MotionGUI::setEncryptionStatus(int status)
+void SOVGUI::setEncryptionStatus(int status)
 {
     QString theme = GUIUtil::getThemeName();
     switch(status)
@@ -1358,7 +1358,7 @@ void MotionGUI::setEncryptionStatus(int status)
 }
 #endif // ENABLE_WALLET
 
-void MotionGUI::showNormalIfMinimized(bool fToggleHidden)
+void SOVGUI::showNormalIfMinimized(bool fToggleHidden)
 {
     if(!clientModel)
         return;
@@ -1383,12 +1383,12 @@ void MotionGUI::showNormalIfMinimized(bool fToggleHidden)
         hide();
 }
 
-void MotionGUI::toggleHidden()
+void SOVGUI::toggleHidden()
 {
     showNormalIfMinimized(true);
 }
 
-void MotionGUI::detectShutdown()
+void SOVGUI::detectShutdown()
 {
     if (ShutdownRequested())
     {
@@ -1398,7 +1398,7 @@ void MotionGUI::detectShutdown()
     }
 }
 
-void MotionGUI::showProgress(const QString &title, int nProgress)
+void SOVGUI::showProgress(const QString &title, int nProgress)
 {
     if (nProgress == 0)
     {
@@ -1421,7 +1421,7 @@ void MotionGUI::showProgress(const QString &title, int nProgress)
         progressDialog->setValue(nProgress);
 }
 
-void MotionGUI::setTrayIconVisible(bool fHideTrayIcon)
+void SOVGUI::setTrayIconVisible(bool fHideTrayIcon)
 {
     if (trayIcon)
     {
@@ -1429,13 +1429,13 @@ void MotionGUI::setTrayIconVisible(bool fHideTrayIcon)
     }
 }
 
-void MotionGUI::showModalOverlay()
+void SOVGUI::showModalOverlay()
 {
     if (modalOverlay && (progressBar->isVisible() || modalOverlay->isLayerVisible()))
         modalOverlay->toggleVisibility();
 }
 
-static bool ThreadSafeMessageBox(MotionGUI *gui, const std::string& message, const std::string& caption, unsigned int style)
+static bool ThreadSafeMessageBox(SOVGUI *gui, const std::string& message, const std::string& caption, unsigned int style)
 {
     bool modal = (style & CClientUIInterface::MODAL);
     // The SECURE flag has no effect in the Qt GUI.
@@ -1452,21 +1452,21 @@ static bool ThreadSafeMessageBox(MotionGUI *gui, const std::string& message, con
     return ret;
 }
 
-void MotionGUI::subscribeToCoreSignals()
+void SOVGUI::subscribeToCoreSignals()
 {
     // Connect signals to client
     uiInterface.ThreadSafeMessageBox.connect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
     uiInterface.ThreadSafeQuestion.connect(boost::bind(ThreadSafeMessageBox, this, _1, _3, _4));
 }
 
-void MotionGUI::unsubscribeFromCoreSignals()
+void SOVGUI::unsubscribeFromCoreSignals()
 {
     // Disconnect signals from client
     uiInterface.ThreadSafeMessageBox.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
     uiInterface.ThreadSafeQuestion.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _3, _4));
 }
 
-void MotionGUI::toggleNetworkActive()
+void SOVGUI::toggleNetworkActive()
 {
     if (clientModel) {
         clientModel->setNetworkActive(!clientModel->getNetworkActive());
@@ -1474,7 +1474,7 @@ void MotionGUI::toggleNetworkActive()
 }
 
 /** Get restart command-line parameters and request restart */
-void MotionGUI::handleRestart(QStringList args)
+void SOVGUI::handleRestart(QStringList args)
 {
     if (!ShutdownRequested())
         Q_EMIT requestedRestart(args);
@@ -1486,12 +1486,12 @@ UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *pl
 {
     createContextMenu();
     setToolTip(tr("Unit to show amounts in. Click to select another unit."));
-    QList<MotionUnits::Unit> units = MotionUnits::availableUnits();
+    QList<SOVUnits::Unit> units = SOVUnits::availableUnits();
     int max_width = 0;
     const QFontMetrics fm(font());
-    Q_FOREACH (const MotionUnits::Unit unit, units)
+    Q_FOREACH (const SOVUnits::Unit unit, units)
     {
-        max_width = qMax(max_width, fm.width(MotionUnits::name(unit)));
+        max_width = qMax(max_width, fm.width(SOVUnits::name(unit)));
     }
     setMinimumSize(max_width, 0);
     setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -1508,9 +1508,9 @@ void UnitDisplayStatusBarControl::mousePressEvent(QMouseEvent *event)
 void UnitDisplayStatusBarControl::createContextMenu()
 {
     menu = new QMenu(this);
-    Q_FOREACH(MotionUnits::Unit u, MotionUnits::availableUnits())
+    Q_FOREACH(SOVUnits::Unit u, SOVUnits::availableUnits())
     {
-        QAction *menuAction = new QAction(QString(MotionUnits::name(u)), this);
+        QAction *menuAction = new QAction(QString(SOVUnits::name(u)), this);
         menuAction->setData(QVariant(u));
         menu->addAction(menuAction);
     }
@@ -1535,7 +1535,7 @@ void UnitDisplayStatusBarControl::setOptionsModel(OptionsModel *optionsModel)
 /** When Display Units are changed on OptionsModel it will refresh the display text of the control on the status bar */
 void UnitDisplayStatusBarControl::updateDisplayUnit(int newUnits)
 {
-    setText(MotionUnits::name(newUnits));
+    setText(SOVUnits::name(newUnits));
 }
 
 /** Shows context menu with Display Unit options by the mouse coordinates */

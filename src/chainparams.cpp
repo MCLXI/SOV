@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
-// Copyright (c) 2017-2018 The Motion Core developers
+// Copyright (c) 2017-2018 The SOV Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -102,8 +102,8 @@ public:
         consensus.nZawyLwmaAveragingWindow = 65;
         consensus.nZawyLwmaAjustedWeight = 3927;
 
-        consensus.nPowTargetTimespan = 30 * 60 * 2; // Motion: 1 hour
-        consensus.nPowTargetSpacing = 2 * 60; // Motion: 2 minutes
+        consensus.nPowTargetTimespan = 30 * 60 * 2; // SOV: 1 hour
+        consensus.nPowTargetSpacing = 2 * 60; // SOV: 2 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.useDarkGravityWave = false;
@@ -148,7 +148,7 @@ public:
         pchMessageStart[3] = 0x74;
         vAlertPubKey = ParseHex("048c4ef0c2c635687f6077a742be01a05748370a24a6d5209283d727e7825bf5b259256169f638e7f845c923abe6f3b3f64177f8dd354c447fbe2ad933f457febe");
         nDefaultPort = 7979;
-        nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in motion
+        nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in sov
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
 
@@ -157,25 +157,25 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x000001e9dc60dd2618e91f7b9014134922c374496b61c1a272519b1c39979d78"));
         assert(genesis.hashMerkleRoot == uint256S("0x537fa2dbc0e079d646ce7770b09cbb7e9615ece5cd65e490c7fb3e3b0021f75f"));
 
-        vSeeds.push_back(CDNSSeedData("motionproject.org", "seed.motionproject.org"));
-        vSeeds.push_back(CDNSSeedData("fixed-seeds.motionproject.org", "one.fixed-seeds.motionproject.org"));
-        vSeeds.push_back(CDNSSeedData("fixed-seeds.motionproject.org", "two.fixed-seeds.motionproject.org"));
-        vSeeds.push_back(CDNSSeedData("fixed-seeds.motionproject.org", "three.fixed-seeds.motionproject.org"));
+        vSeeds.push_back(CDNSSeedData("sovproject.org", "seed.sovproject.org"));
+        vSeeds.push_back(CDNSSeedData("fixed-seeds.sovproject.org", "one.fixed-seeds.sovproject.org"));
+        vSeeds.push_back(CDNSSeedData("fixed-seeds.sovproject.org", "two.fixed-seeds.sovproject.org"));
+        vSeeds.push_back(CDNSSeedData("fixed-seeds.sovproject.org", "three.fixed-seeds.sovproject.org"));
         // vFixedSeeds.clear();
         // vSeeds.clear();
 
-        // Motion addresses start with 'M'
+        // SOV addresses start with 'M'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
-        // Motion script addresses start with '8'
+        // SOV script addresses start with '8'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,18);
-        // Motion private keys start with 't'
+        // SOV private keys start with 't'
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
-        // Motion BIP32 pubkeys start with 'xpub' (Motion defaults)
+        // SOV BIP32 pubkeys start with 'xpub' (SOV defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        // Motion BIP32 prvkeys start with 'xprv' (Motion defaults)
+        // SOV BIP32 prvkeys start with 'xprv' (SOV defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
 
-        // Motion BIP44 coin type is '5'
+        // SOV BIP44 coin type is '5'
         nExtCoinType = 5;
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
@@ -236,8 +236,8 @@ public:
         consensus.nZawyLwmaAveragingWindow = 65;
         consensus.nZawyLwmaAjustedWeight = 3927;
 
-        consensus.nPowTargetTimespan = 30 * 60 * 2; // Motion: 1 hour
-        consensus.nPowTargetSpacing = 2 * 60; // Motion: 2 minutes
+        consensus.nPowTargetTimespan = 30 * 60 * 2; // SOV: 1 hour
+        consensus.nPowTargetSpacing = 2 * 60; // SOV: 2 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.useDarkGravityWave = false;
@@ -280,23 +280,23 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x00000ba049e5c1f95474ea3fc62d5f1b1632a294c20c22fea701134a43cf3068"));
         assert(genesis.hashMerkleRoot == uint256S("0xd5dec0980d7b84cc1c048eb8706afe68bbbdb07fdefab76de8d176dfcb858ae8"));
 
-        vSeeds.push_back(CDNSSeedData("testnet.motionproject.org", "testnet.seed.motionproject.org"));
-        vSeeds.push_back(CDNSSeedData("fixed-seeds.motionproject.org", "testnet.fixed-seeds.motionproject.org"));
+        vSeeds.push_back(CDNSSeedData("testnet.sovproject.org", "testnet.seed.sovproject.org"));
+        vSeeds.push_back(CDNSSeedData("fixed-seeds.sovproject.org", "testnet.fixed-seeds.sovproject.org"));
         // vFixedSeeds.clear();
         // vSeeds.clear();
 
-        // Testnet Motion addresses start with 'm'
+        // Testnet SOV addresses start with 'm'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,110);
-        // Testnet Motion script addresses start with '9'
+        // Testnet SOV script addresses start with '9'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,21);
-        // Testnet private keys start with '9' or 'c' (Motion defaults)
+        // Testnet private keys start with '9' or 'c' (SOV defaults)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        // Testnet Motion BIP32 pubkeys start with 'tpub' (Motion defaults)
+        // Testnet SOV BIP32 pubkeys start with 'tpub' (SOV defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Testnet Motion BIP32 prvkeys start with 'tprv' (Motion defaults)
+        // Testnet SOV BIP32 prvkeys start with 'tprv' (SOV defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
 
-        // Testnet Motion BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet SOV BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
@@ -356,8 +356,8 @@ public:
         consensus.nZawyLwmaAveragingWindow = 65;
         consensus.nZawyLwmaAjustedWeight = 3927;
 
-        consensus.nPowTargetTimespan = 30 * 60 * 2; // Motion: 1 hour
-        consensus.nPowTargetSpacing = 2 * 60; // Motion: 2 minutes
+        consensus.nPowTargetTimespan = 30 * 60 * 2; // SOV: 1 hour
+        consensus.nPowTargetSpacing = 2 * 60; // SOV: 2 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.useDarkGravityWave = false;
@@ -383,7 +383,7 @@ public:
         pchMessageStart[1] = 0xaf;
         pchMessageStart[2] = 0xbf;
         pchMessageStart[3] = 0xf5;
-        nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in motion
+        nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in sov
         nDelayGetHeadersTime = 0; // never delay GETHEADERS in regtests
         nDefaultPort = 17978;
         nPruneAfterHeight = 1000;
@@ -411,18 +411,18 @@ public:
             0,
             0
         };
-        // Regtest Motion addresses start with 'o'
+        // Regtest SOV addresses start with 'o'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,115);
-        // Regtest Motion script addresses start with 'a'
+        // Regtest SOV script addresses start with 'a'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,83);
-        // Regtest private keys start with '9' or 'c' (Motion defaults)
+        // Regtest private keys start with '9' or 'c' (SOV defaults)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        // Regtest Motion BIP32 pubkeys start with 'tpub' (Motion defaults)
+        // Regtest SOV BIP32 pubkeys start with 'tpub' (SOV defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Regtest Motion BIP32 prvkeys start with 'tprv' (Motion defaults)
+        // Regtest SOV BIP32 prvkeys start with 'tprv' (SOV defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
 
-        // Regtest Motion BIP44 coin type is '1' (All coin's testnet default)
+        // Regtest SOV BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
    }
 };

@@ -5,7 +5,7 @@
 #include "support/pagelocker.h"
 
 #if defined(HAVE_CONFIG_H)
-#include "config/motion-config.h"
+#include "config/sov-config.h"
 #endif
 
 #ifdef WIN32

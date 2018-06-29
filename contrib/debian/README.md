@@ -1,21 +1,21 @@
 
 Debian
 ====================
-This directory contains files used to package motiond/motion-qt
-for Debian-based Linux systems. If you compile motiond/motion-qt yourself, there are some useful files here.
+This directory contains files used to package sovd/sov-qt
+for Debian-based Linux systems. If you compile sovd/sov-qt yourself, there are some useful files here.
 
-## motion: URI support ##
+## sov: URI support ##
 
 
-motion-qt.desktop  (Gnome / Open Desktop)
+sov-qt.desktop  (Gnome / Open Desktop)
 To install:
 
-	sudo desktop-file-install motion-qt.desktop
+	sudo desktop-file-install sov-qt.desktop
 	sudo update-desktop-database
 
 If you build yourself, you will either need to modify the paths in
-the .desktop file or copy or symlink your motion-qt binary to `/usr/bin`
-and the `../../share/pixmaps/motion128.png` to `/usr/share/pixmaps`
+the .desktop file or copy or symlink your sov-qt binary to `/usr/bin`
+and the `../../share/pixmaps/sov128.png` to `/usr/share/pixmaps`
 
-motion-qt.protocol (KDE)
+sov-qt.protocol (KDE)
 

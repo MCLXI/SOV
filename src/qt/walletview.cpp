@@ -6,7 +6,7 @@
 
 #include "addressbookpage.h"
 #include "askpassphrasedialog.h"
-#include "motiongui.h"
+#include "sovgui.h"
 #include "clientmodel.h"
 #include "guiutil.h"
 #include "masternodeconfig.h"
@@ -121,7 +121,7 @@ WalletView::~WalletView()
 {
 }
 
-void WalletView::setMotionGUI(MotionGUI *gui)
+void WalletView::setSOVGUI(SOVGUI *gui)
 {
     if (gui)
     {

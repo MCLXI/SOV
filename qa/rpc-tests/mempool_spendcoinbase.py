@@ -13,11 +13,11 @@
 # but less mature coinbase spends are NOT.
 #
 
-from test_framework.test_framework import MotionTestFramework
+from test_framework.test_framework import SOVTestFramework
 from test_framework.util import *
 
 # Create one-input, one-output, no-fee transaction:
-class MempoolSpendCoinbaseTest(MotionTestFramework):
+class MempoolSpendCoinbaseTest(SOVTestFramework):
 
     def setup_network(self):
         # Just need one node for this test

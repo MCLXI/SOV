@@ -1,35 +1,35 @@
-Motion Core 0.1.2
+SOV Core 0.1.2
 ===============================
 
 
-https://www.motionproject.org
+https://www.sovproject.org
 
 
-What is Motion?
+What is SOV?
 ----------------
 
-Motion is an experimental new digital currency that enables anonymous, instant
-payments to anyone, anywhere in the world. Motion uses peer-to-peer technology
+SOV is an experimental new digital currency that enables anonymous, instant
+payments to anyone, anywhere in the world. SOV uses peer-to-peer technology
 to operate with no central authority: managing transactions and issuing money
-are carried out collectively by the network. Motion Core is the name of the open
+are carried out collectively by the network. SOV Core is the name of the open
 source software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Motion Core software, see https://www.motionproject.org/.
+the SOV Core software, see https://www.sovproject.org/.
 
 
 License
 -------
 
-Motion Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+SOV Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
 
 Development Process
 -------------------
 
 The `master` branch is meant to be stable. Development is normally done in separate branches.
-[Tags](https://github.com/motioncrypto/motion/tags) are created to indicate new official,
-stable release versions of Motion Core.
+[Tags](https://github.com/sovcrypto/sov/tags) are created to indicate new official,
+stable release versions of SOV Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 

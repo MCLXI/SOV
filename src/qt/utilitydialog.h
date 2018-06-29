@@ -2,13 +2,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_QT_UTILITYDIALOG_H
-#define MOTION_QT_UTILITYDIALOG_H
+#ifndef SOV_QT_UTILITYDIALOG_H
+#define SOV_QT_UTILITYDIALOG_H
 
 #include <QDialog>
 #include <QObject>
 
-class MotionGUI;
+class SOVGUI;
 class ClientModel;
 
 namespace Ui {
@@ -49,10 +49,10 @@ class ShutdownWindow : public QWidget
 
 public:
     ShutdownWindow(QWidget *parent=0, Qt::WindowFlags f=0);
-    static QWidget *showShutdownWindow(MotionGUI *window);
+    static QWidget *showShutdownWindow(SOVGUI *window);
 
 protected:
     void closeEvent(QCloseEvent *event);
 };
 
-#endif // MOTION_QT_UTILITYDIALOG_H
+#endif // SOV_QT_UTILITYDIALOG_H

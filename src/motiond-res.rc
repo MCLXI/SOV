@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Motion"
-            VALUE "FileDescription",    "motiond (Motion node with a JSON-RPC server)"
+            VALUE "CompanyName",        "SOV"
+            VALUE "FileDescription",    "sovd (SOV node with a JSON-RPC server)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "motiond"
+            VALUE "InternalName",       "sovd"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "motiond.exe"
-            VALUE "ProductName",        "motiond"
+            VALUE "OriginalFilename",   "sovd.exe"
+            VALUE "ProductName",        "sovd"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

@@ -7,13 +7,13 @@ reset-files.bash
 *.tar.gz
 
 *.exe
-src/motion
-src/motiond
-src/motion-cli
-src/motion-tx
-src/test/test_motion
-src/qt/test/test_motion-qt
-src/bench/bench_motion
+src/sov
+src/sovd
+src/sov-cli
+src/sov-tx
+src/test/test_sov
+src/qt/test/test_sov-qt
+src/bench/bench_sov
 
 # autoreconf
 Makefile.in
@@ -36,8 +36,8 @@ config.log
 config.status
 configure
 libtool
-src/config/motion-config.h
-src/config/motion-config.h.in
+src/config/sov-config.h
+src/config/sov-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -63,7 +63,7 @@ libconftest.dylib*
 *.o
 *.o-*
 *.patch
-.motion
+.sov
 *.a
 *.pb.cc
 *.pb.h
@@ -82,12 +82,12 @@ libconftest.dylib*
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-motion-qt
-Motion-Qt.app
+sov-qt
+SOV-Qt.app
 
 # Unit-tests
 Makefile.test
-motion-qt_test
+sov-qt_test
 src/test/buildenv.py
 
 # Resources cpp
@@ -101,7 +101,7 @@ build
 *.gcno
 *.gcda
 /*.info
-test_motion.coverage/
+test_sov.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -109,13 +109,13 @@ coverage_percent.txt
 linux-coverage-build
 linux-build
 win32-build
-qa/pull-tester/run-motiond-for-test.sh
+qa/pull-tester/run-sovd-for-test.sh
 qa/pull-tester/tests_config.py
 qa/pull-tester/cache/*
 qa/pull-tester/test.*/*
 qa/tmp
 cache/
-share/MotiondComparisonTool.jar
+share/SOVdComparisonTool.jar
 
 !src/leveldb*/Makefile
 
@@ -124,12 +124,12 @@ share/MotiondComparisonTool.jar
 .autotools
 /doc/doxygen/
 
-libmotionconsensus.pc
-src/qt/motion-qt.bash
+libsovconsensus.pc
+src/qt/sov-qt.bash
 qa/pull-tester/tests-config.sh
 
 #development symlinks
-motion-cli
-motiond
-motion-qt
+sov-cli
+sovd
+sov-qt
 make

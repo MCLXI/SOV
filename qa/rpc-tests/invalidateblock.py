@@ -7,10 +7,10 @@
 # Test InvalidateBlock code
 #
 
-from test_framework.test_framework import MotionTestFramework
+from test_framework.test_framework import SOVTestFramework
 from test_framework.util import *
 
-class InvalidateTest(MotionTestFramework):
+class InvalidateTest(SOVTestFramework):
     
         
     def setup_chain(self):

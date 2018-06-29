@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_QT_MOTIONAMOUNTFIELD_H
-#define MOTION_QT_MOTIONAMOUNTFIELD_H
+#ifndef SOV_QT_SOVAMOUNTFIELD_H
+#define SOV_QT_SOVAMOUNTFIELD_H
 
 #include "amount.h"
 
@@ -15,18 +15,18 @@ QT_BEGIN_NAMESPACE
 class QValueComboBox;
 QT_END_NAMESPACE
 
-/** Widget for entering motion amounts.
+/** Widget for entering sov amounts.
   */
-class MotionAmountField: public QWidget
+class SOVAmountField: public QWidget
 {
     Q_OBJECT
 
     // ugly hack: for some unknown reason CAmount (instead of qint64) does not work here as expected
-    // discussion: https://github.com/motion/motion/pull/5117
+    // discussion: https://github.com/sov/sov/pull/5117
     Q_PROPERTY(qint64 value READ value WRITE setValue NOTIFY valueChanged USER true)
 
 public:
-    explicit MotionAmountField(QWidget *parent = 0);
+    explicit SOVAmountField(QWidget *parent = 0);
 
     CAmount value(bool *value=0) const;
     void setValue(const CAmount& value);
@@ -72,4 +72,4 @@ private Q_SLOTS:
 
 };
 
-#endif // MOTION_QT_MOTIONAMOUNTFIELD_H
+#endif // SOV_QT_SOVAMOUNTFIELD_H

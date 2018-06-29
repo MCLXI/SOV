@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_QT_MOTIONUNITS_H
-#define MOTION_QT_MOTIONUNITS_H
+#ifndef SOV_QT_SOVUNITS_H
+#define SOV_QT_SOVUNITS_H
 
 #include "amount.h"
 
@@ -42,24 +42,24 @@
 #define THIN_SP_UTF8 REAL_THIN_SP_UTF8
 #define THIN_SP_HTML HTML_HACK_SP
 
-/** Motion unit definitions. Encapsulates parsing and formatting
+/** SOV unit definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes.
 */
-class MotionUnits: public QAbstractListModel
+class SOVUnits: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit MotionUnits(QObject *parent);
+    explicit SOVUnits(QObject *parent);
 
-    /** Motion units.
-      @note Source: https://en.motion.it/wiki/Units . Please add only sensible ones
+    /** SOV units.
+      @note Source: https://en.sov.it/wiki/Units . Please add only sensible ones
      */
     enum Unit
     {
-        XMN,
-        mXMN,
-        uXMN,
+        SOV,
+        mSOV,
+        uSOV,
         duffs
     };
 
@@ -127,8 +127,8 @@ public:
     static CAmount maxMoney();
 
 private:
-    QList<MotionUnits::Unit> unitlist;
+    QList<SOVUnits::Unit> unitlist;
 };
-typedef MotionUnits::Unit MotionUnit;
+typedef SOVUnits::Unit SOVUnit;
 
-#endif // MOTION_QT_MOTIONUNITS_H
+#endif // SOV_QT_SOVUNITS_H

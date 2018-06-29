@@ -1,6 +1,6 @@
 [Protocol]
-exec=motion-qt '%u'
-protocol=motion
+exec=sov-qt '%u'
+protocol=sov
 input=none
 output=none
 helper=true

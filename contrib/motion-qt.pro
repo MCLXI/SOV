@@ -20,4 +20,4 @@ FORMS += \
     ../src/qt/forms/transactiondescdialog.ui
 
 RESOURCES += \
-    ../src/qt/motion.qrc
+    ../src/qt/sov.qrc

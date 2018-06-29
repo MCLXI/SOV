@@ -3,7 +3,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "motionaddressvalidator.h"
+#include "sovaddressvalidator.h"
 
 #include "base58.h"
 
@@ -16,12 +16,12 @@
   - All lower-case letters except for 'l'
 */
 
-MotionAddressEntryValidator::MotionAddressEntryValidator(QObject *parent) :
+SOVAddressEntryValidator::SOVAddressEntryValidator(QObject *parent) :
     QValidator(parent)
 {
 }
 
-QValidator::State MotionAddressEntryValidator::validate(QString &input, int &pos) const
+QValidator::State SOVAddressEntryValidator::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
 
@@ -81,16 +81,16 @@ QValidator::State MotionAddressEntryValidator::validate(QString &input, int &pos
     return state;
 }
 
-MotionAddressCheckValidator::MotionAddressCheckValidator(QObject *parent) :
+SOVAddressCheckValidator::SOVAddressCheckValidator(QObject *parent) :
     QValidator(parent)
 {
 }
 
-QValidator::State MotionAddressCheckValidator::validate(QString &input, int &pos) const
+QValidator::State SOVAddressCheckValidator::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
-    // Validate the passed Motion address
-    CMotionAddress addr(input.toStdString());
+    // Validate the passed SOV address
+    CSOVAddress addr(input.toStdString());
     if (addr.IsValid())
         return QValidator::Acceptable;
 

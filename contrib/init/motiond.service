@@ -1,15 +1,15 @@
 [Unit]
-Description=Motion's distributed currency daemon
+Description=SOV's distributed currency daemon
 After=network.target
 
 [Service]
-User=motioncore
-Group=motioncore
+User=sovcore
+Group=sovcore
 
 Type=forking
-PIDFile=/var/lib/motiond/motiond.pid
-ExecStart=/usr/bin/motiond -daemon -pid=/var/lib/motiond/motiond.pid \
--conf=/etc/motioncore/motion.conf -datadir=/var/lib/motiond -disablewallet
+PIDFile=/var/lib/sovd/sovd.pid
+ExecStart=/usr/bin/sovd -daemon -pid=/var/lib/sovd/sovd.pid \
+-conf=/etc/sovcore/sov.conf -datadir=/var/lib/sovd -disablewallet
 
 Restart=always
 PrivateTmp=true

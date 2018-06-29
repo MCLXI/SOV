@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_CRYPTO_RIPEMD160_H
-#define MOTION_CRYPTO_RIPEMD160_H
+#ifndef SOV_CRYPTO_RIPEMD160_H
+#define SOV_CRYPTO_RIPEMD160_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -25,4 +25,4 @@ public:
     CRIPEMD160& Reset();
 };
 
-#endif // MOTION_CRYPTO_RIPEMD160_H
+#endif // SOV_CRYPTO_RIPEMD160_H

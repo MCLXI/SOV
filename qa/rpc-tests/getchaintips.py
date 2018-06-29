@@ -7,13 +7,13 @@
 # on chains of different lengths, and join the network together again.
 # This gives us two tips, verify that it works.
 
-from test_framework.test_framework import MotionTestFramework
+from test_framework.test_framework import SOVTestFramework
 from test_framework.util import assert_equal
 
-class GetChainTipsTest (MotionTestFramework):
+class GetChainTipsTest (SOVTestFramework):
 
     def run_test (self):
-        MotionTestFramework.run_test (self)
+        SOVTestFramework.run_test (self)
 
         tips = self.nodes[0].getchaintips ()
         assert_equal (len (tips), 1)

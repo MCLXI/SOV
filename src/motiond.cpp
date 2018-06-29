@@ -27,8 +27,8 @@
  *
  * \section intro_sec Introduction
  *
- * This is the developer documentation of the reference client for an experimental new digital currency called Motion (https://www.motion.org/),
- * which enables instant payments to anyone, anywhere in the world. Motion uses peer-to-peer technology to operate
+ * This is the developer documentation of the reference client for an experimental new digital currency called SOV (https://www.sov.org/),
+ * which enables instant payments to anyone, anywhere in the world. SOV uses peer-to-peer technology to operate
  * with no central authority: managing transactions and issuing money are carried out collectively by the network.
  *
  * The software is a community-driven open source project, released under the MIT license.
@@ -69,13 +69,13 @@ bool AppInit(int argc, char* argv[])
     //
     // Parameters
     //
-    // If Qt is used, parameters/motion.conf are parsed in qt/motion.cpp's main()
+    // If Qt is used, parameters/sov.conf are parsed in qt/sov.cpp's main()
     ParseParameters(argc, argv);
 
     // Process help and version before taking care about datadir
     if (mapArgs.count("-?") || mapArgs.count("-h") ||  mapArgs.count("-help") || mapArgs.count("-version"))
     {
-        std::string strUsage = _("Motion Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
+        std::string strUsage = _("SOV Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
 
         if (mapArgs.count("-version"))
         {
@@ -84,9 +84,9 @@ bool AppInit(int argc, char* argv[])
         else
         {
             strUsage += "\n" + _("Usage:") + "\n" +
-                  "  motiond [options]                     " + _("Start Motion Core Daemon") + "\n";
+                  "  sovd [options]                     " + _("Start SOV Core Daemon") + "\n";
 
-            strUsage += "\n" + HelpMessage(HMM_MOTIOND);
+            strUsage += "\n" + HelpMessage(HMM_SOVD);
         }
 
         fprintf(stdout, "%s", strUsage.c_str());
@@ -131,19 +131,19 @@ bool AppInit(int argc, char* argv[])
         // Command-line RPC
         bool fCommandLine = false;
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "motion:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "sov:"))
                 fCommandLine = true;
 
         if (fCommandLine)
         {
-            fprintf(stderr, "Error: There is no RPC client functionality in motiond anymore. Use the motion-cli utility instead.\n");
+            fprintf(stderr, "Error: There is no RPC client functionality in sovd anymore. Use the sov-cli utility instead.\n");
             exit(EXIT_FAILURE);
         }
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon)
         {
-            fprintf(stdout, "Motion Core server starting\n");
+            fprintf(stdout, "SOV Core server starting\n");
 
             // Daemonize
             pid_t pid = fork();
@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
 {
     SetupEnvironment();
 
-    // Connect motiond signal handlers
+    // Connect sovd signal handlers
     noui_connect();
 
     return (AppInit(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE);

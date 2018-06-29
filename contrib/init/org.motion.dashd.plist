@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>org.motion.motiond</string>
+	<string>org.sov.sovd</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/bin/motiond</string>
+		<string>/usr/local/bin/sovd</string>
 		<string>-daemon</string>
 	</array>
 	<key>RunAtLoad</key>

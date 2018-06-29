@@ -3,9 +3,9 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: Motion Core consensus library
-Description: Library for the Motion consensus protocol.
+Name: SOV Core consensus library
+Description: Library for the SOV consensus protocol.
 Version: @PACKAGE_VERSION@
-Libs: -L${libdir} -lmotionconsensus
+Libs: -L${libdir} -lsovconsensus
 Cflags: -I${includedir}
 Requires.private: libcrypto

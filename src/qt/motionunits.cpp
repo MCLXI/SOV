@@ -3,36 +3,36 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "motionunits.h"
+#include "sovunits.h"
 #include "chainparams.h"
 #include "primitives/transaction.h"
 
 #include <QSettings>
 #include <QStringList>
 
-MotionUnits::MotionUnits(QObject *parent):
+SOVUnits::SOVUnits(QObject *parent):
         QAbstractListModel(parent),
         unitlist(availableUnits())
 {
 }
 
-QList<MotionUnits::Unit> MotionUnits::availableUnits()
+QList<SOVUnits::Unit> SOVUnits::availableUnits()
 {
-    QList<MotionUnits::Unit> unitlist;
-    unitlist.append(XMN);
-    unitlist.append(mXMN);
-    unitlist.append(uXMN);
+    QList<SOVUnits::Unit> unitlist;
+    unitlist.append(SOV);
+    unitlist.append(mSOV);
+    unitlist.append(uSOV);
     unitlist.append(duffs);
     return unitlist;
 }
 
-bool MotionUnits::valid(int unit)
+bool SOVUnits::valid(int unit)
 {
     switch(unit)
     {
-    case XMN:
-    case mXMN:
-    case uXMN:
+    case SOV:
+    case mSOV:
+    case uSOV:
     case duffs:
         return true;
     default:
@@ -40,15 +40,15 @@ bool MotionUnits::valid(int unit)
     }
 }
 
-QString MotionUnits::name(int unit)
+QString SOVUnits::name(int unit)
 {
     if(Params().NetworkIDString() == CBaseChainParams::MAIN)
     {
         switch(unit)
         {
-            case XMN: return QString("XMN");
-            case mXMN: return QString("mXMN");
-            case uXMN: return QString::fromUtf8("μXMN");
+            case SOV: return QString("SOV");
+            case mSOV: return QString("mSOV");
+            case uSOV: return QString::fromUtf8("μSOV");
             case duffs: return QString("duffs");
             default: return QString("???");
         }
@@ -57,25 +57,25 @@ QString MotionUnits::name(int unit)
     {
         switch(unit)
         {
-            case XMN: return QString("tXMN");
-            case mXMN: return QString("mtXMN");
-            case uXMN: return QString::fromUtf8("μtXMN");
+            case SOV: return QString("tSOV");
+            case mSOV: return QString("mtSOV");
+            case uSOV: return QString::fromUtf8("μtSOV");
             case duffs: return QString("tduffs");
             default: return QString("???");
         }
     }
 }
 
-QString MotionUnits::description(int unit)
+QString SOVUnits::description(int unit)
 {
     if(Params().NetworkIDString() == CBaseChainParams::MAIN)
     {
         switch(unit)
         {
-            case XMN: return QString("Motion");
-            case mXMN: return QString("Milli-Motion (1 / 1" THIN_SP_UTF8 "000)");
-            case uXMN: return QString("Micro-Motion (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-            case duffs: return QString("Ten Nano-Motion (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case SOV: return QString("SOV");
+            case mSOV: return QString("Milli-SOV (1 / 1" THIN_SP_UTF8 "000)");
+            case uSOV: return QString("Micro-SOV (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case duffs: return QString("Ten Nano-SOV (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
@@ -83,40 +83,40 @@ QString MotionUnits::description(int unit)
     {
         switch(unit)
         {
-            case XMN: return QString("TestMotions");
-            case mXMN: return QString("Milli-TestMotion (1 / 1" THIN_SP_UTF8 "000)");
-            case uXMN: return QString("Micro-TestMotion (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-            case duffs: return QString("Ten Nano-TestMotion (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case SOV: return QString("TestSOVs");
+            case mSOV: return QString("Milli-TestSOV (1 / 1" THIN_SP_UTF8 "000)");
+            case uSOV: return QString("Micro-TestSOV (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            case duffs: return QString("Ten Nano-TestSOV (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             default: return QString("???");
         }
     }
 }
 
-qint64 MotionUnits::factor(int unit)
+qint64 SOVUnits::factor(int unit)
 {
     switch(unit)
     {
-    case XMN:  return 100000000;
-    case mXMN: return 100000;
-    case uXMN: return 100;
+    case SOV:  return 100000000;
+    case mSOV: return 100000;
+    case uSOV: return 100;
     case duffs: return 1;
     default:   return 100000000;
     }
 }
 
-int MotionUnits::decimals(int unit)
+int SOVUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case XMN: return 8;
-    case mXMN: return 5;
-    case uXMN: return 2;
+    case SOV: return 8;
+    case mSOV: return 5;
+    case uSOV: return 2;
     case duffs: return 0;
     default: return 0;
     }
 }
 
-QString MotionUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators)
+QString SOVUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
@@ -159,19 +159,19 @@ QString MotionUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorS
 // Please take care to use formatHtmlWithUnit instead, when
 // appropriate.
 
-QString MotionUnits::formatWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString SOVUnits::formatWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     return format(unit, amount, plussign, separators) + QString(" ") + name(unit);
 }
 
-QString MotionUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString SOVUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QString str(formatWithUnit(unit, amount, plussign, separators));
     str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
     return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
 }
 
-QString MotionUnits::floorWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString SOVUnits::floorWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QSettings settings;
     int digits = settings.value("digits").toInt();
@@ -182,14 +182,14 @@ QString MotionUnits::floorWithUnit(int unit, const CAmount& amount, bool plussig
     return result + QString(" ") + name(unit);
 }
 
-QString MotionUnits::floorHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString SOVUnits::floorHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QString str(floorWithUnit(unit, amount, plussign, separators));
     str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
     return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
 }
 
-bool MotionUnits::parse(int unit, const QString &value, CAmount *val_out)
+bool SOVUnits::parse(int unit, const QString &value, CAmount *val_out)
 {
     if(!valid(unit) || value.isEmpty())
         return false; // Refuse to parse invalid unit or empty string
@@ -228,23 +228,23 @@ bool MotionUnits::parse(int unit, const QString &value, CAmount *val_out)
     return ok;
 }
 
-QString MotionUnits::getAmountColumnTitle(int unit)
+QString SOVUnits::getAmountColumnTitle(int unit)
 {
     QString amountTitle = QObject::tr("Amount");
-    if (MotionUnits::valid(unit))
+    if (SOVUnits::valid(unit))
     {
-        amountTitle += " ("+MotionUnits::name(unit) + ")";
+        amountTitle += " ("+SOVUnits::name(unit) + ")";
     }
     return amountTitle;
 }
 
-int MotionUnits::rowCount(const QModelIndex &parent) const
+int SOVUnits::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return unitlist.size();
 }
 
-QVariant MotionUnits::data(const QModelIndex &index, int role) const
+QVariant SOVUnits::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
     if(row >= 0 && row < unitlist.size())
@@ -264,7 +264,7 @@ QVariant MotionUnits::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-CAmount MotionUnits::maxMoney()
+CAmount SOVUnits::maxMoney()
 {
     return MAX_MONEY;
 }

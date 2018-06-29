@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_QT_RECENTREQUESTSTABLEMODEL_H
-#define MOTION_QT_RECENTREQUESTSTABLEMODEL_H
+#ifndef SOV_QT_RECENTREQUESTSTABLEMODEL_H
+#define SOV_QT_RECENTREQUESTSTABLEMODEL_H
 
 #include "walletmodel.h"
 
@@ -111,4 +111,4 @@ private:
     void emitCountChanged();
 };
 
-#endif // MOTION_QT_RECENTREQUESTSTABLEMODEL_H
+#endif // SOV_QT_RECENTREQUESTSTABLEMODEL_H

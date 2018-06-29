@@ -2,9 +2,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "motionamountfield.h"
+#include "sovamountfield.h"
 
-#include "motionunits.h"
+#include "sovunits.h"
 #include "guiconstants.h"
 #include "qvaluecombobox.h"
 
@@ -24,7 +24,7 @@ class AmountSpinBox: public QAbstractSpinBox
 public:
     explicit AmountSpinBox(QWidget *parent):
         QAbstractSpinBox(parent),
-        currentUnit(MotionUnits::XMN),
+        currentUnit(SOVUnits::SOV),
         singleStep(100000) // satoshis
     {
         setAlignment(Qt::AlignRight);
@@ -48,7 +48,7 @@ public:
         CAmount val = parse(input, &valid);
         if(valid)
         {
-            input = MotionUnits::format(currentUnit, val, false, MotionUnits::separatorAlways);
+            input = SOVUnits::format(currentUnit, val, false, SOVUnits::separatorAlways);
             lineEdit()->setText(input);
         }
     }
@@ -60,7 +60,7 @@ public:
 
     void setValue(const CAmount& value)
     {
-        lineEdit()->setText(MotionUnits::format(currentUnit, value, false, MotionUnits::separatorAlways));
+        lineEdit()->setText(SOVUnits::format(currentUnit, value, false, SOVUnits::separatorAlways));
         Q_EMIT valueChanged();
     }
 
@@ -69,7 +69,7 @@ public:
         bool valid = false;
         CAmount val = value(&valid);
         val = val + steps * singleStep;
-        val = qMin(qMax(val, CAmount(0)), MotionUnits::maxMoney());
+        val = qMin(qMax(val, CAmount(0)), SOVUnits::maxMoney());
         setValue(val);
     }
 
@@ -99,7 +99,7 @@ public:
 
             const QFontMetrics fm(fontMetrics());
             int h = lineEdit()->minimumSizeHint().height();
-            int w = fm.width(MotionUnits::format(MotionUnits::XMN, MotionUnits::maxMoney(), false, MotionUnits::separatorAlways));
+            int w = fm.width(SOVUnits::format(SOVUnits::SOV, SOVUnits::maxMoney(), false, SOVUnits::separatorAlways));
             w += 2; // cursor blinking space
 
             QStyleOptionSpinBox opt;
@@ -137,10 +137,10 @@ private:
     CAmount parse(const QString &text, bool *valid_out=0) const
     {
         CAmount val = 0;
-        bool valid = MotionUnits::parse(currentUnit, text, &val);
+        bool valid = SOVUnits::parse(currentUnit, text, &val);
         if(valid)
         {
-            if(val < 0 || val > MotionUnits::maxMoney())
+            if(val < 0 || val > SOVUnits::maxMoney())
                 valid = false;
         }
         if(valid_out)
@@ -178,7 +178,7 @@ protected:
         {
             if(val > 0)
                 rv |= StepDownEnabled;
-            if(val < MotionUnits::maxMoney())
+            if(val < SOVUnits::maxMoney())
                 rv |= StepUpEnabled;
         }
         return rv;
@@ -188,9 +188,9 @@ Q_SIGNALS:
     void valueChanged();
 };
 
-#include "motionamountfield.moc"
+#include "sovamountfield.moc"
 
-MotionAmountField::MotionAmountField(QWidget *parent) :
+SOVAmountField::SOVAmountField(QWidget *parent) :
     QWidget(parent),
     amount(0)
 {
@@ -202,7 +202,7 @@ MotionAmountField::MotionAmountField(QWidget *parent) :
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(amount);
     unit = new QValueComboBox(this);
-    unit->setModel(new MotionUnits(this));
+    unit->setModel(new SOVUnits(this));
     layout->addWidget(unit);
     layout->addStretch(1);
     layout->setContentsMargins(0,0,0,0);
@@ -220,19 +220,19 @@ MotionAmountField::MotionAmountField(QWidget *parent) :
     unitChanged(unit->currentIndex());
 }
 
-void MotionAmountField::clear()
+void SOVAmountField::clear()
 {
     amount->clear();
     unit->setCurrentIndex(0);
 }
 
-void MotionAmountField::setEnabled(bool fEnabled)
+void SOVAmountField::setEnabled(bool fEnabled)
 {
     amount->setEnabled(fEnabled);
     unit->setEnabled(fEnabled);
 }
 
-bool MotionAmountField::validate()
+bool SOVAmountField::validate()
 {
     bool valid = false;
     value(&valid);
@@ -240,7 +240,7 @@ bool MotionAmountField::validate()
     return valid;
 }
 
-void MotionAmountField::setValid(bool valid)
+void SOVAmountField::setValid(bool valid)
 {
     if (valid)
         amount->setStyleSheet("");
@@ -248,7 +248,7 @@ void MotionAmountField::setValid(bool valid)
         amount->setStyleSheet(STYLE_INVALID);
 }
 
-bool MotionAmountField::eventFilter(QObject *object, QEvent *event)
+bool SOVAmountField::eventFilter(QObject *object, QEvent *event)
 {
     if (event->type() == QEvent::FocusIn)
     {
@@ -258,45 +258,45 @@ bool MotionAmountField::eventFilter(QObject *object, QEvent *event)
     return QWidget::eventFilter(object, event);
 }
 
-QWidget *MotionAmountField::setupTabChain(QWidget *prev)
+QWidget *SOVAmountField::setupTabChain(QWidget *prev)
 {
     QWidget::setTabOrder(prev, amount);
     QWidget::setTabOrder(amount, unit);
     return unit;
 }
 
-CAmount MotionAmountField::value(bool *valid_out) const
+CAmount SOVAmountField::value(bool *valid_out) const
 {
     return amount->value(valid_out);
 }
 
-void MotionAmountField::setValue(const CAmount& value)
+void SOVAmountField::setValue(const CAmount& value)
 {
     amount->setValue(value);
 }
 
-void MotionAmountField::setReadOnly(bool fReadOnly)
+void SOVAmountField::setReadOnly(bool fReadOnly)
 {
     amount->setReadOnly(fReadOnly);
 }
 
-void MotionAmountField::unitChanged(int idx)
+void SOVAmountField::unitChanged(int idx)
 {
     // Use description tooltip for current unit for the combobox
     unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
 
     // Determine new unit ID
-    int newUnit = unit->itemData(idx, MotionUnits::UnitRole).toInt();
+    int newUnit = unit->itemData(idx, SOVUnits::UnitRole).toInt();
 
     amount->setDisplayUnit(newUnit);
 }
 
-void MotionAmountField::setDisplayUnit(int newUnit)
+void SOVAmountField::setDisplayUnit(int newUnit)
 {
     unit->setValue(newUnit);
 }
 
-void MotionAmountField::setSingleStep(const CAmount& step)
+void SOVAmountField::setSingleStep(const CAmount& step)
 {
     amount->setSingleStep(step);
 }

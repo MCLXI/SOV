@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_TXMEMPOOL_H
-#define MOTION_TXMEMPOOL_H
+#ifndef SOV_TXMEMPOOL_H
+#define SOV_TXMEMPOOL_H
 
 #include <list>
 #include <set>
@@ -679,4 +679,4 @@ struct TxCoinAgePriorityCompare
     }
 };
 
-#endif // MOTION_TXMEMPOOL_H
+#endif // SOV_TXMEMPOOL_H

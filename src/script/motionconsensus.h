@@ -3,11 +3,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_MOTIONCONSENSUS_H
-#define MOTION_MOTIONCONSENSUS_H
+#ifndef SOV_SOVCONSENSUS_H
+#define SOV_SOVCONSENSUS_H
 
-#if defined(BUILD_MOTION_INTERNAL) && defined(HAVE_CONFIG_H)
-#include "config/motion-config.h"
+#if defined(BUILD_SOV_INTERNAL) && defined(HAVE_CONFIG_H)
+#include "config/sov-config.h"
   #if defined(_WIN32)
     #if defined(DLL_EXPORT)
       #if defined(HAVE_FUNC_ATTRIBUTE_DLLEXPORT)
@@ -19,7 +19,7 @@
   #elif defined(HAVE_FUNC_ATTRIBUTE_VISIBILITY)
     #define EXPORT_SYMBOL __attribute__ ((visibility ("default")))
   #endif
-#elif defined(MSC_VER) && !defined(STATIC_LIBMOTIONCONSENSUS)
+#elif defined(MSC_VER) && !defined(STATIC_LIBSOVCONSENSUS)
   #define EXPORT_SYMBOL __declspec(dllimport)
 #endif
 
@@ -31,34 +31,34 @@
 extern "C" {
 #endif
 
-#define MOTIONCONSENSUS_API_VER 0
+#define SOVCONSENSUS_API_VER 0
 
-typedef enum motionconsensus_error_t
+typedef enum sovconsensus_error_t
 {
-    motionconsensus_ERR_OK = 0,
-    motionconsensus_ERR_TX_INDEX,
-    motionconsensus_ERR_TX_SIZE_MISMATCH,
-    motionconsensus_ERR_TX_DESERIALIZE,
-} motionconsensus_error;
+    sovconsensus_ERR_OK = 0,
+    sovconsensus_ERR_TX_INDEX,
+    sovconsensus_ERR_TX_SIZE_MISMATCH,
+    sovconsensus_ERR_TX_DESERIALIZE,
+} sovconsensus_error;
 
 /** Script verification flags */
 enum
 {
-    motionconsensus_SCRIPT_FLAGS_VERIFY_NONE                = 0,
-    motionconsensus_SCRIPT_FLAGS_VERIFY_P2SH                = (1U << 0), // evaluate P2SH (BIP16) subscripts
-    motionconsensus_SCRIPT_FLAGS_VERIFY_DERSIG              = (1U << 2), // enforce strict DER (BIP66) compliance
-    motionconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY = (1U << 9), // enable CHECKLOCKTIMEVERIFY (BIP65)
+    sovconsensus_SCRIPT_FLAGS_VERIFY_NONE                = 0,
+    sovconsensus_SCRIPT_FLAGS_VERIFY_P2SH                = (1U << 0), // evaluate P2SH (BIP16) subscripts
+    sovconsensus_SCRIPT_FLAGS_VERIFY_DERSIG              = (1U << 2), // enforce strict DER (BIP66) compliance
+    sovconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY = (1U << 9), // enable CHECKLOCKTIMEVERIFY (BIP65)
 };
 
 /// Returns 1 if the input nIn of the serialized transaction pointed to by
 /// txTo correctly spends the scriptPubKey pointed to by scriptPubKey under
 /// the additional constraints specified by flags.
 /// If not NULL, err will contain an error/success code for the operation
-EXPORT_SYMBOL int motionconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
+EXPORT_SYMBOL int sovconsensus_verify_script(const unsigned char *scriptPubKey, unsigned int scriptPubKeyLen,
                                     const unsigned char *txTo        , unsigned int txToLen,
-                                    unsigned int nIn, unsigned int flags, motionconsensus_error* err);
+                                    unsigned int nIn, unsigned int flags, sovconsensus_error* err);
 
-EXPORT_SYMBOL unsigned int motionconsensus_version();
+EXPORT_SYMBOL unsigned int sovconsensus_version();
 
 #ifdef __cplusplus
 } // extern "C"
@@ -66,4 +66,4 @@ EXPORT_SYMBOL unsigned int motionconsensus_version();
 
 #undef EXPORT_SYMBOL
 
-#endif // MOTION_MOTIONCONSENSUS_H
+#endif // SOV_SOVCONSENSUS_H

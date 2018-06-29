@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[motion.qt-translation-012x]
-file_filter = src/qt/locale/motion_<lang>.ts
-source_file = src/qt/locale/motion_en.ts
+[sov.qt-translation-012x]
+file_filter = src/qt/locale/sov_<lang>.ts
+source_file = src/qt/locale/sov_en.ts
 source_lang = en

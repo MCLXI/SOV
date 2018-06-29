@@ -7,7 +7,7 @@
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
 
-#include "motionunits.h"
+#include "sovunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -39,7 +39,7 @@ class TxViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 public:
     TxViewDelegate(const PlatformStyle *_platformStyle, QObject *parent=nullptr):
-        QAbstractItemDelegate(parent), unit(MotionUnits::XMN),
+        QAbstractItemDelegate(parent), unit(SOVUnits::SOV),
         platformStyle(_platformStyle)
     {
 
@@ -98,7 +98,7 @@ public:
             foreground = option.palette.color(QPalette::Text);
         }
         painter->setPen(foreground);
-        QString amountText = MotionUnits::floorWithUnit(unit, amount, true, MotionUnits::separatorAlways);
+        QString amountText = SOVUnits::floorWithUnit(unit, amount, true, SOVUnits::separatorAlways);
         if(!confirmed)
         {
             amountText = QString("[") + amountText + QString("]");
@@ -310,15 +310,15 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-    ui->labelBalance->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, balance, false, MotionUnits::separatorAlways));
-    ui->labelUnconfirmed->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, MotionUnits::separatorAlways));
-    ui->labelImmature->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, MotionUnits::separatorAlways));
-    ui->labelAnonymized->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, anonymizedBalance, false, MotionUnits::separatorAlways));
-    ui->labelTotal->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, balance + unconfirmedBalance + immatureBalance, false, MotionUnits::separatorAlways));
-    ui->labelWatchAvailable->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, watchOnlyBalance, false, MotionUnits::separatorAlways));
-    ui->labelWatchPending->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, watchUnconfBalance, false, MotionUnits::separatorAlways));
-    ui->labelWatchImmature->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, watchImmatureBalance, false, MotionUnits::separatorAlways));
-    ui->labelWatchTotal->setText(MotionUnits::floorHtmlWithUnit(nDisplayUnit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, MotionUnits::separatorAlways));
+    ui->labelBalance->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, balance, false, SOVUnits::separatorAlways));
+    ui->labelUnconfirmed->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, SOVUnits::separatorAlways));
+    ui->labelImmature->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, SOVUnits::separatorAlways));
+    ui->labelAnonymized->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, anonymizedBalance, false, SOVUnits::separatorAlways));
+    ui->labelTotal->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, balance + unconfirmedBalance + immatureBalance, false, SOVUnits::separatorAlways));
+    ui->labelWatchAvailable->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, watchOnlyBalance, false, SOVUnits::separatorAlways));
+    ui->labelWatchPending->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, watchUnconfBalance, false, SOVUnits::separatorAlways));
+    ui->labelWatchImmature->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, watchImmatureBalance, false, SOVUnits::separatorAlways));
+    ui->labelWatchTotal->setText(SOVUnits::floorHtmlWithUnit(nDisplayUnit, watchOnlyBalance + watchUnconfBalance + watchImmatureBalance, false, SOVUnits::separatorAlways));
 
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users
@@ -420,7 +420,7 @@ void OverviewPage::setWalletModel(WalletModel *model)
     this->walletModel = model;
     if(model && model->getOptionsModel())
     {
-        // update the display unit, to not use the default ("XMN")
+        // update the display unit, to not use the default ("SOV")
         updateDisplayUnit();
         // Keep up to date with wallet
         setBalance(model->getBalance(), model->getUnconfirmedBalance(), model->getImmatureBalance(), model->getAnonymizedBalance(),
@@ -479,7 +479,7 @@ void OverviewPage::updatePrivateSendProgress()
     if(!pwalletMain) return;
 
     QString strAmountAndRounds;
-    QString strPrivateSendAmount = MotionUnits::formatHtmlWithUnit(nDisplayUnit, privateSendClient.nPrivateSendAmount * COIN, false, MotionUnits::separatorAlways);
+    QString strPrivateSendAmount = SOVUnits::formatHtmlWithUnit(nDisplayUnit, privateSendClient.nPrivateSendAmount * COIN, false, SOVUnits::separatorAlways);
 
     if(currentBalance == 0)
     {
@@ -487,7 +487,7 @@ void OverviewPage::updatePrivateSendProgress()
         ui->privateSendProgress->setToolTip(tr("No inputs detected"));
 
         // when balance is zero just show info from settings
-        strPrivateSendAmount = strPrivateSendAmount.remove(strPrivateSendAmount.indexOf("."), MotionUnits::decimals(nDisplayUnit) + 1);
+        strPrivateSendAmount = strPrivateSendAmount.remove(strPrivateSendAmount.indexOf("."), SOVUnits::decimals(nDisplayUnit) + 1);
         strAmountAndRounds = strPrivateSendAmount + " / " + tr("%n Rounds", "", privateSendClient.nPrivateSendRounds);
 
         ui->labelAmountRounds->setToolTip(tr("No inputs detected"));
@@ -507,17 +507,17 @@ void OverviewPage::updatePrivateSendProgress()
     if(nMaxToAnonymize >= privateSendClient.nPrivateSendAmount * COIN) {
         ui->labelAmountRounds->setToolTip(tr("Found enough compatible inputs to anonymize %1")
                                           .arg(strPrivateSendAmount));
-        strPrivateSendAmount = strPrivateSendAmount.remove(strPrivateSendAmount.indexOf("."), MotionUnits::decimals(nDisplayUnit) + 1);
+        strPrivateSendAmount = strPrivateSendAmount.remove(strPrivateSendAmount.indexOf("."), SOVUnits::decimals(nDisplayUnit) + 1);
         strAmountAndRounds = strPrivateSendAmount + " / " + tr("%n Rounds", "", privateSendClient.nPrivateSendRounds);
     } else {
-        QString strMaxToAnonymize = MotionUnits::formatHtmlWithUnit(nDisplayUnit, nMaxToAnonymize, false, MotionUnits::separatorAlways);
+        QString strMaxToAnonymize = SOVUnits::formatHtmlWithUnit(nDisplayUnit, nMaxToAnonymize, false, SOVUnits::separatorAlways);
         ui->labelAmountRounds->setToolTip(tr("Not enough compatible inputs to anonymize <span style='color:red;'>%1</span>,<br>"
                                              "will anonymize <span style='color:red;'>%2</span> instead")
                                           .arg(strPrivateSendAmount)
                                           .arg(strMaxToAnonymize));
-        strMaxToAnonymize = strMaxToAnonymize.remove(strMaxToAnonymize.indexOf("."), MotionUnits::decimals(nDisplayUnit) + 1);
+        strMaxToAnonymize = strMaxToAnonymize.remove(strMaxToAnonymize.indexOf("."), SOVUnits::decimals(nDisplayUnit) + 1);
         strAmountAndRounds = "<span style='color:red;'>" +
-                QString(MotionUnits::factor(nDisplayUnit) == 1 ? "" : "~") + strMaxToAnonymize +
+                QString(SOVUnits::factor(nDisplayUnit) == 1 ? "" : "~") + strMaxToAnonymize +
                 " / " + tr("%n Rounds", "", privateSendClient.nPrivateSendRounds) + "</span>";
     }
     ui->labelAmountRounds->setText(strAmountAndRounds);
@@ -748,7 +748,7 @@ void OverviewPage::togglePrivateSend(){
     if(!privateSendClient.fEnablePrivateSend){
         const CAmount nMinAmount = CPrivateSend::GetSmallestDenomination() + CPrivateSend::GetMaxCollateralAmount();
         if(currentBalance < nMinAmount){
-            QString strMinAmount(MotionUnits::formatWithUnit(nDisplayUnit, nMinAmount));
+            QString strMinAmount(SOVUnits::formatWithUnit(nDisplayUnit, nMinAmount));
             QMessageBox::warning(this, tr("PrivateSend"),
                 tr("PrivateSend requires at least %1 to use.").arg(strMinAmount),
                 QMessageBox::Ok, QMessageBox::Ok);

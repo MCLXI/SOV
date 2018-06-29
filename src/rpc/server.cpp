@@ -243,11 +243,11 @@ UniValue stop(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop Motion Core server.");
+            "\nStop SOV Core server.");
     // Event loop will exit after current HTTP requests have been handled, so
     // this reply will get back to the client.
     StartShutdown();
-    return "Motion Core server stopping";
+    return "SOV Core server stopping";
 }
 
 /**
@@ -343,20 +343,20 @@ static const CRPCCommand vRPCCommands[] =
     { "hidden",             "resendwallettransactions", &resendwallettransactions, true},
 #endif
 
-    /* Motion features */
-    { "motion",               "masternode",             &masternode,             true  },
-    { "motion",               "masternodelist",         &masternodelist,         true  },
-    { "motion",               "masternodebroadcast",    &masternodebroadcast,    true  },
-    { "motion",               "gobject",                &gobject,                true  },
-    { "motion",               "getgovernanceinfo",      &getgovernanceinfo,      true  },
-    { "motion",               "getsuperblockbudget",    &getsuperblockbudget,    true  },
-    { "motion",               "voteraw",                &voteraw,                true  },
-    { "motion",               "mnsync",                 &mnsync,                 true  },
-    { "motion",               "spork",                  &spork,                  true  },
-    { "motion",               "getpoolinfo",            &getpoolinfo,            true  },
-    { "motion",               "sentinelping",           &sentinelping,           true  },
+    /* SOV features */
+    { "sov",               "masternode",             &masternode,             true  },
+    { "sov",               "masternodelist",         &masternodelist,         true  },
+    { "sov",               "masternodebroadcast",    &masternodebroadcast,    true  },
+    { "sov",               "gobject",                &gobject,                true  },
+    { "sov",               "getgovernanceinfo",      &getgovernanceinfo,      true  },
+    { "sov",               "getsuperblockbudget",    &getsuperblockbudget,    true  },
+    { "sov",               "voteraw",                &voteraw,                true  },
+    { "sov",               "mnsync",                 &mnsync,                 true  },
+    { "sov",               "spork",                  &spork,                  true  },
+    { "sov",               "getpoolinfo",            &getpoolinfo,            true  },
+    { "sov",               "sentinelping",           &sentinelping,           true  },
 #ifdef ENABLE_WALLET
-    { "motion",               "privatesend",            &privatesend,            false },
+    { "sov",               "privatesend",            &privatesend,            false },
 
     /* Wallet */
     { "wallet",             "keepass",                &keepass,                true },
@@ -580,7 +580,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(const std::string& methodname, const std::string& args)
 {
-    return "> motion-cli " + methodname + " " + args + "\n";
+    return "> sov-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(const std::string& methodname, const std::string& args)

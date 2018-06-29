@@ -58,12 +58,12 @@
         <translation>Mottagaradresser</translation>
     </message>
     <message>
-        <source>These are your Motion addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>De här är dina Motion-adresser för att skicka betalningar. Kontrollera alltid mängden och mottagaradressen innan du skickar mynt.</translation>
+        <source>These are your SOV addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>De här är dina SOV-adresser för att skicka betalningar. Kontrollera alltid mängden och mottagaradressen innan du skickar mynt.</translation>
     </message>
     <message>
-        <source>These are your Motion addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>De här är dina Motion-adresser för betalningsmottagningar. Det rekommenderas att använda en ny mottagaradress för varje transaktion.</translation>
+        <source>These are your SOV addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>De här är dina SOV-adresser för betalningsmottagningar. Det rekommenderas att använda en ny mottagaradress för varje transaktion.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -164,8 +164,8 @@
         <translation>Bekräfta plånbokskryptering</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MOTION&lt;/b&gt;!</source>
-        <translation>Varning: Om du krypterar din plånbok och förlorar din lösenfras kommer du att &lt;b&gt;FÖRLORA ALLA DINA MOTION&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SOV&lt;/b&gt;!</source>
+        <translation>Varning: Om du krypterar din plånbok och förlorar din lösenfras kommer du att &lt;b&gt;FÖRLORA ALLA DINA SOV&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -176,8 +176,8 @@
         <translation>Plånbok krypterad</translation>
     </message>
     <message>
-        <source>Motion will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your motions from being stolen by malware infecting your computer.</source>
-        <translation>Motion kommer nu att färdigställa krypteringsprocessen. Kom ihåg att krypteringen av din plånbok inte kan skydda dig helt och hållet från att dina Motion stjäls av skadeprogram som har infekterat din dator.</translation>
+        <source>SOV will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your sovs from being stolen by malware infecting your computer.</source>
+        <translation>SOV kommer nu att färdigställa krypteringsprocessen. Kom ihåg att krypteringen av din plånbok inte kan skydda dig helt och hållet från att dina SOV stjäls av skadeprogram som har infekterat din dator.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -217,10 +217,10 @@
     </message>
 </context>
 <context>
-    <name>MotionGUI</name>
+    <name>SOVGUI</name>
     <message>
-        <source>Motion Core</source>
-        <translation>Motion Core
+        <source>SOV Core</source>
+        <translation>SOV Core
 </translation>
     </message>
     <message>
@@ -244,16 +244,16 @@
         <translation>&amp;Skicka</translation>
     </message>
     <message>
-        <source>Send coins to a Motion address</source>
-        <translation>Skicka mynt till en Motion-adress</translation>
+        <source>Send coins to a SOV address</source>
+        <translation>Skicka mynt till en SOV-adress</translation>
     </message>
     <message>
         <source>&amp;Receive</source>
         <translation>&amp;Motta</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and motion: URIs)</source>
-        <translation>Begär betalningar (genererar QR-koder och Motion:-URI:s)</translation>
+        <source>Request payments (generates QR codes and sov: URIs)</source>
+        <translation>Begär betalningar (genererar QR-koder och SOV:-URI:s)</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
@@ -272,8 +272,8 @@
         <translation>Avsluta applikationen</translation>
     </message>
     <message>
-        <source>&amp;About Motion Core</source>
-        <translation>&amp;Om Motion Core</translation>
+        <source>&amp;About SOV Core</source>
+        <translation>&amp;Om SOV Core</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -288,8 +288,8 @@
         <translation>&amp;Alternativ...</translation>
     </message>
     <message>
-        <source>Modify configuration options for Motion</source>
-        <translation>Anpassa konfigurationsalternatv för Motion</translation>
+        <source>Modify configuration options for SOV</source>
+        <translation>Anpassa konfigurationsalternatv för SOV</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -340,16 +340,16 @@
         <translation>Signera &amp;meddelande...</translation>
     </message>
     <message>
-        <source>Sign messages with your Motion addresses to prove you own them</source>
-        <translation>Signera meddelanden med dina Motion-adresser för att bevisa att du äger dem</translation>
+        <source>Sign messages with your SOV addresses to prove you own them</source>
+        <translation>Signera meddelanden med dina SOV-adresser för att bevisa att du äger dem</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Bekräfta meddelande...</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Motion addresses</source>
-        <translation>Bekräfta meddelanden för att garantera att de signerades med de angivna Motion-adresserna</translation>
+        <source>Verify messages to ensure they were signed with specified SOV addresses</source>
+        <translation>Bekräfta meddelanden för att garantera att de signerades med de angivna SOV-adresserna</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -404,16 +404,16 @@
         <translation>Öppna &amp;URI...</translation>
     </message>
     <message>
-        <source>Open a motion: URI or payment request</source>
-        <translation>Öppna en Motion-URI eller betalningsbegäran</translation>
+        <source>Open a sov: URI or payment request</source>
+        <translation>Öppna en SOV-URI eller betalningsbegäran</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Kommandoradalternativ</translation>
     </message>
     <message>
-        <source>Show the Motion Core help message to get a list with possible Motion command-line options</source>
-        <translation>Visa Motion Core-hjälpmeddelandet för att få en lista med möjliga Motion-kommandoradalternativ</translation>
+        <source>Show the SOV Core help message to get a list with possible SOV command-line options</source>
+        <translation>Visa SOV Core-hjälpmeddelandet för att få en lista med möjliga SOV-kommandoradalternativ</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -758,28 +758,28 @@ Adress: %4
         <translation>Vänligen välj en integritetsnivå.</translation>
     </message>
     <message>
-        <source>Use 2 separate masternodes to mix funds up to 1000 MOTION</source>
-        <translation>Använd 2 enskilda masternoder för att mixa medel upp till 1000 MOTION</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 SOV</source>
+        <translation>Använd 2 enskilda masternoder för att mixa medel upp till 1000 SOV</translation>
     </message>
     <message>
-        <source>Use 8 separate masternodes to mix funds up to 1000 MOTION</source>
-        <translation>Använd 8 enskilda masternoder för att mixa medel upp till 1000 MOTION.</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 SOV</source>
+        <translation>Använd 8 enskilda masternoder för att mixa medel upp till 1000 SOV.</translation>
     </message>
     <message>
         <source>Use 16 separate masternodes</source>
         <translation>Använd 16 enskilda masternoder</translation>
     </message>
     <message>
-        <source>This option is the quickest and will cost about ~0.025 MOTION to anonymize 1000 MOTION</source>
-        <translation>Detta alternativ är det snabbaste och kommer att kosta omkring ~0,025 MOTION för att anonymisera 1000 MOTION</translation>
+        <source>This option is the quickest and will cost about ~0.025 SOV to anonymize 1000 SOV</source>
+        <translation>Detta alternativ är det snabbaste och kommer att kosta omkring ~0,025 SOV för att anonymisera 1000 SOV</translation>
     </message>
     <message>
-        <source>This option is moderately fast and will cost about 0.05 MOTION to anonymize 1000 MOTION</source>
-        <translation>Detta alternativ är relativt snabbt och kommer att kosta omkring 0,05 MOTION för att anonymisera 1000 MOTION</translation>
+        <source>This option is moderately fast and will cost about 0.05 SOV to anonymize 1000 SOV</source>
+        <translation>Detta alternativ är relativt snabbt och kommer att kosta omkring 0,05 SOV för att anonymisera 1000 SOV</translation>
     </message>
     <message>
-        <source>0.1 MOTION per 1000 MOTION you anonymize.</source>
-        <translation>0,1 MOTION per 1000 MOTION du anonymiserar.</translation>
+        <source>0.1 SOV per 1000 SOV you anonymize.</source>
+        <translation>0,1 SOV per 1000 SOV du anonymiserar.</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
@@ -790,16 +790,16 @@ Adress: %4
         <translation>Darksend-konfiguration</translation>
     </message>
     <message>
-        <source>Darksend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Motion's configuration screen.</source>
-        <translation>Darksend ställdes framgångsrikt om till grundläggande (%1 och 2 omgångar). Du kan ändra detta när som helst genom att öppna Motion:s konfigurationsskärm.</translation>
+        <source>Darksend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening SOV's configuration screen.</source>
+        <translation>Darksend ställdes framgångsrikt om till grundläggande (%1 och 2 omgångar). Du kan ändra detta när som helst genom att öppna SOV:s konfigurationsskärm.</translation>
     </message>
     <message>
-        <source>Darksend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Motion's configuration screen.</source>
-        <translation>Darksend ställdes framgångsrikt in på hög (%1 och 8 omgångar). Du kan ändra detta när som helst genom att öppna Motion:s konfigurationsskärm.</translation>
+        <source>Darksend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening SOV's configuration screen.</source>
+        <translation>Darksend ställdes framgångsrikt in på hög (%1 och 8 omgångar). Du kan ändra detta när som helst genom att öppna SOV:s konfigurationsskärm.</translation>
     </message>
     <message>
-        <source>Darksend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Motion's configuration screen.</source>
-        <translation>Darksend ställdes framgångsrikt in på maximal (%1 och 16 omgångar). Du kan ändra detta när som helst genom att öppna Motion:s konfigurationsskärm</translation>
+        <source>Darksend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening SOV's configuration screen.</source>
+        <translation>Darksend ställdes framgångsrikt in på maximal (%1 och 16 omgångar). Du kan ändra detta när som helst genom att öppna SOV:s konfigurationsskärm</translation>
     </message>
 </context>
 <context>
@@ -841,8 +841,8 @@ Adress: %4
         <translation>Redigera avsändaradress</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Motion address.</source>
-        <translation>Den angivna adressen "%1" är inte en giltig Motion-adress.</translation>
+        <source>The entered address "%1" is not a valid SOV address.</source>
+        <translation>Den angivna adressen "%1" är inte en giltig SOV-adress.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -883,8 +883,8 @@ Adress: %4
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Motion Core</source>
-        <translation>Motion Core
+        <source>SOV Core</source>
+        <translation>SOV Core
 </translation>
     </message>
     <message>
@@ -931,16 +931,16 @@ Adress: %4
         <translation>Välkommen</translation>
     </message>
     <message>
-        <source>Welcome to Motion Core.</source>
-        <translation>Välkommen till Motion Core.</translation>
+        <source>Welcome to SOV Core.</source>
+        <translation>Välkommen till SOV Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Motion Core will store its data.</source>
-        <translation>Då detta är första gången programmet startas kan du välja var Motion Core ska lagra sin data.</translation>
+        <source>As this is the first time the program is launched, you can choose where SOV Core will store its data.</source>
+        <translation>Då detta är första gången programmet startas kan du välja var SOV Core ska lagra sin data.</translation>
     </message>
     <message>
-        <source>Motion Core will download and store a copy of the Motion block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Motion Core kommer att laddas ned och lagra en kopia av Motion:s blockkedja. Minst %1 GB data kommer att lagras i denna katalog och den kommer att växa med tiden. Plånboken kommer också att lagras i denna katalog.</translation>
+        <source>SOV Core will download and store a copy of the SOV block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>SOV Core kommer att laddas ned och lagra en kopia av SOV:s blockkedja. Minst %1 GB data kommer att lagras i denna katalog och den kommer att växa med tiden. Plånboken kommer också att lagras i denna katalog.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -989,12 +989,12 @@ Adress: %4
         <translation>&amp;Huvud</translation>
     </message>
     <message>
-        <source>Automatically start Motion after logging in to the system.</source>
-        <translation>Starta Motion automatiskt efter systeminloggning.</translation>
+        <source>Automatically start SOV after logging in to the system.</source>
+        <translation>Starta SOV automatiskt efter systeminloggning.</translation>
     </message>
     <message>
-        <source>&amp;Start Motion on system login</source>
-        <translation>&amp;Starta Motion vid systeminloggning</translation>
+        <source>&amp;Start SOV on system login</source>
+        <translation>&amp;Starta SOV vid systeminloggning</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
@@ -1021,8 +1021,8 @@ Adress: %4
         <translation>Denna mängd fungerar som en tröskel att stänga av Darksend då det har uppnåtts.</translation>
     </message>
     <message>
-        <source>Amount of Motion to keep anonymized</source>
-        <translation>Mängd Motion att bibehålla anonymiserade</translation>
+        <source>Amount of SOV to keep anonymized</source>
+        <translation>Mängd SOV att bibehålla anonymiserade</translation>
     </message>
     <message>
         <source>W&amp;allet</source>
@@ -1049,8 +1049,8 @@ Adress: %4
         <translation>&amp;Nätverk</translation>
     </message>
     <message>
-        <source>Automatically open the Motion client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Öppna Motion:s klientport automatiskt på routern. Detta fungerar bara om din router stöder UPnP och är aktiverad.</translation>
+        <source>Automatically open the SOV client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Öppna SOV:s klientport automatiskt på routern. Detta fungerar bara om din router stöder UPnP och är aktiverad.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1101,14 +1101,14 @@ Adress: %4
         <translation>Användargränssnitt&amp;språk: </translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Motion.</source>
-        <translation>Användargränssnittspråket kan ställas in här. Denna inställning träder i kraft efter att Motion startats om.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting SOV.</source>
+        <translation>Användargränssnittspråket kan ställas in här. Denna inställning träder i kraft efter att SOV startats om.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/projects/p/motion/</source>
+https://www.transifex.com/projects/p/sov/</source>
         <translation>Fattas språk eller är det en ofullständig översättning? Hjälp till att bidra med översättningar här:
-https://www.transifex.com/projects/p/motion/</translation>
+https://www.transifex.com/projects/p/sov/</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
@@ -1182,8 +1182,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Formulär</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Motion network after a connection is established, but this process has not completed yet.</source>
-        <translation>Den visade informationen kan vara utdaterad. Din plånbok synkroniseras automatiskt med Motion-nätverket efter att en anslutning har etablerats men denna process har ännu inte slutförts.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the SOV network after a connection is established, but this process has not completed yet.</source>
+        <translation>Den visade informationen kan vara utdaterad. Din plånbok synkroniseras automatiskt med SOV-nätverket efter att en anslutning har etablerats men denna process har ännu inte slutförts.</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -1238,8 +1238,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Mängd och omgångar:</translation>
     </message>
     <message>
-        <source>0 MOTION / 0 Rounds</source>
-        <translation>0 MOTION/0 omgångar</translation>
+        <source>0 SOV / 0 Rounds</source>
+        <translation>0 SOV/0 omgångar</translation>
     </message>
     <message>
         <source>Submitted Denom:</source>
@@ -1335,8 +1335,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Fel vid betalningsbegäran</translation>
     </message>
     <message>
-        <source>Cannot start motion: click-to-pay handler</source>
-        <translation>Kan inte starta motion: klicka-för-att-betala hanterare</translation>
+        <source>Cannot start sov: click-to-pay handler</source>
+        <translation>Kan inte starta sov: klicka-för-att-betala hanterare</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1435,8 +1435,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Antal anslutningar</translation>
     </message>
     <message>
-        <source>Open the Motion debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Öppna Motions avsökningsloggfil från den nuvarande datakatalogen. Detta kan ta ett par sekunder för stora loggfiler.</translation>
+        <source>Open the SOV debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Öppna SOVs avsökningsloggfil från den nuvarande datakatalogen. Detta kan ta ett par sekunder för stora loggfiler.</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -1507,8 +1507,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Ut:</translation>
     </message>
     <message>
-        <source>Welcome to the Motion RPC console.</source>
-        <translation>Välkommen till Motions RPC-konsol.</translation>
+        <source>Welcome to the SOV RPC console.</source>
+        <translation>Välkommen till SOVs RPC-konsol.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -1542,8 +1542,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Åt&amp;eranvänd en befintlig mottagaradress (rekommenderas inte)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Motion network.</source>
-        <translation>Ett valfritt meddelande att bifoga betalningsbegärandet vilket kommer att visas när begärandet öppnas. Observera: Meddelandet kommer inte att skickas med betalningen över Motion-nätverket.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the SOV network.</source>
+        <translation>Ett valfritt meddelande att bifoga betalningsbegärandet vilket kommer att visas när begärandet öppnas. Observera: Meddelandet kommer inte att skickas med betalningen över SOV-nätverket.</translation>
     </message>
     <message>
         <source>&amp;Message:</source>
@@ -1899,8 +1899,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Fel: Plånboken låstes upp enbart för att anonymisera mynt.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Motion address</source>
-        <translation>Varning: Ogiltig Motion-adress</translation>
+        <source>Warning: Invalid SOV address</source>
+        <translation>Varning: Ogiltig SOV-adress</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -1958,8 +1958,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Meddelande:</translation>
     </message>
     <message>
-        <source>A message that was attached to the motion: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Motion network.</source>
-        <translation>Ett meddelande som bifogades till Motion: URI vilket kommer att lagras med transaktionen så att du vet. Observera: Meddelandet kommer inte att skickas över Motion-nätverket.</translation>
+        <source>A message that was attached to the sov: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the SOV network.</source>
+        <translation>Ett meddelande som bifogades till SOV: URI vilket kommer att lagras med transaktionen så att du vet. Observera: Meddelandet kommer inte att skickas över SOV-nätverket.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>
@@ -1985,8 +1985,8 @@ https://www.transifex.com/projects/p/motion/</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Motion Core is shutting down...</source>
-        <translation>Motion Core stängs ned...</translation>
+        <source>SOV Core is shutting down...</source>
+        <translation>SOV Core stängs ned...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2036,8 +2036,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Kopiera den nuvarande valda signaturen till systemurklippet</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Motion address</source>
-        <translation>Signera meddelandet för att bevisa att du äger denna Motion-adress</translation>
+        <source>Sign the message to prove you own this SOV address</source>
+        <translation>Signera meddelandet för att bevisa att du äger denna SOV-adress</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2060,8 +2060,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Skriv in signeringsadressen, meddelandet, (försäkra dig om att du kopierar linjeavbrott, mellanslag, flikar med mera) och signera nedtill för att verifiera meddelandet. Var försiktig med att inte läsa in mer i signaturen än vad som finns i det signerade meddelandet för att undvika att bli lurad av en mellanhandattack.</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Motion address</source>
-        <translation>Bekräfta meddelandet för att försäkra dig om att den signerades med den angivna Motion-adressen</translation>
+        <source>Verify the message to ensure it was signed with the specified SOV address</source>
+        <translation>Bekräfta meddelandet för att försäkra dig om att den signerades med den angivna SOV-adressen</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2127,8 +2127,8 @@ https://www.transifex.com/projects/p/motion/</translation>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Motion Core</source>
-        <translation>Motion Core
+        <source>SOV Core</source>
+        <translation>SOV Core
 </translation>
     </message>
     <message>
@@ -2136,12 +2136,12 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Version %1</translation>
     </message>
     <message>
-        <source>The Motion Core developers</source>
-        <translation>Motion Core-utvecklarna</translation>
+        <source>The SOV Core developers</source>
+        <translation>SOV Core-utvecklarna</translation>
     </message>
     <message>
-        <source>The Motion Core developers</source>
-        <translation>Motion Core-utvecklarna</translation>
+        <source>The SOV Core developers</source>
+        <translation>SOV Core-utvecklarna</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -2656,14 +2656,14 @@ https://www.transifex.com/projects/p/motion/</translation>
     </message>
 </context>
 <context>
-    <name>motion-core</name>
+    <name>sov-core</name>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
         <translation>Sammanbind till fastställd adress och avlyssna alltid den. Använd [host]:port-notation för IPv6</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Motion Core is probably already running.</source>
-        <translation>Kan inte erhålla ett lås på datakatalog %s. Motion Core körs förmodligen redan.</translation>
+        <source>Cannot obtain a lock on data directory %s. SOV Core is probably already running.</source>
+        <translation>Kan inte erhålla ett lås på datakatalog %s. SOV Core körs förmodligen redan.</translation>
     </message>
     <message>
         <source>Darksend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
@@ -2718,16 +2718,16 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Detta är en förhandsutgiven testkompilering - använd på egen risk - använd inte för utvinning eller handlarapplikationer.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Motion Core is probably already running.</source>
-        <translation>Det går inte att binda till %s till denna dator. Motion Core körs förmodligen redan.</translation>
+        <source>Unable to bind to %s on this computer. SOV Core is probably already running.</source>
+        <translation>Det går inte att binda till %s till denna dator. SOV Core körs förmodligen redan.</translation>
     </message>
     <message>
         <source>Unable to locate enough Darksend denominated funds for this transaction.</source>
         <translation>Kunde inte hitta tillräckliga Darksend-denominationsmedel för denna transaktion.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 MOTION.</source>
-        <translation>Kunde inte hitta tillräckliga Darksend-icke-denominationsmedel för denna transaktion som inte är likvärdiga 1000 MOTION.</translation>
+        <source>Unable to locate enough Darksend non-denominated funds for this transaction that are not equal 1000 SOV.</source>
+        <translation>Kunde inte hitta tillräckliga Darksend-icke-denominationsmedel för denna transaktion som inte är likvärdiga 1000 SOV.</translation>
     </message>
     <message>
         <source>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</source>
@@ -2942,8 +2942,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Information</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Motion Core is shutting down.</source>
-        <translation>Initialiseringstillståndkontroll misslyckades. Motion Core stängs ned.</translation>
+        <source>Initialization sanity check failed. SOV Core is shutting down.</source>
+        <translation>Initialiseringstillståndkontroll misslyckades. SOV Core stängs ned.</translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -3066,8 +3066,8 @@ https://www.transifex.com/projects/p/motion/</translation>
         <translation>Lösenord för JSON-RPC-anslutningar</translation>
     </message>
     <message>
-        <source>RPC SSL options: (see the Motion Wiki for SSL setup instructions)</source>
-        <translation>RPC SSL-alternativ: (Se Motion Wiki för SSL-inställningsinstruktioner)</translation>
+        <source>RPC SSL options: (see the SOV Wiki for SSL setup instructions)</source>
+        <translation>RPC SSL-alternativ: (Se SOV Wiki för SSL-inställningsinstruktioner)</translation>
     </message>
     <message>
         <source>RPC server options:</source>

@@ -1,2 +1,2 @@
-usr/local/bin/motiond usr/bin
-usr/local/bin/motion-cli usr/bin
+usr/local/bin/sovd usr/bin
+usr/local/bin/sov-cli usr/bin

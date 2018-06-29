@@ -2,15 +2,15 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_CHAINPARAMSBASE_H
-#define MOTION_CHAINPARAMSBASE_H
+#ifndef SOV_CHAINPARAMSBASE_H
+#define SOV_CHAINPARAMSBASE_H
 
 #include <string>
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between motion-cli and motiond)
- * of a given instance of the Motion system.
+ * CBaseChainParams defines the base parameters (shared between sov-cli and sovd)
+ * of a given instance of the SOV system.
  */
 class CBaseChainParams
 {
@@ -59,4 +59,4 @@ std::string ChainNameFromCommandLine();
  */
 bool AreBaseParamsConfigured();
 
-#endif // MOTION_CHAINPARAMSBASE_H
+#endif // SOV_CHAINPARAMSBASE_H

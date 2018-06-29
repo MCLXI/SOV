@@ -1,5 +1,5 @@
-#ifndef MOTION_TEST_TEST_MOTION_H
-#define MOTION_TEST_TEST_MOTION_H
+#ifndef SOV_TEST_TEST_SOV_H
+#define SOV_TEST_TEST_SOV_H
 
 #include "chainparamsbase.h"
 #include "key.h"

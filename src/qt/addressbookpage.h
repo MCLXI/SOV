@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_QT_ADDRESSBOOKPAGE_H
-#define MOTION_QT_ADDRESSBOOKPAGE_H
+#ifndef SOV_QT_ADDRESSBOOKPAGE_H
+#define SOV_QT_ADDRESSBOOKPAGE_H
 
 #include <QDialog>
 
@@ -85,4 +85,4 @@ Q_SIGNALS:
     void sendCoins(QString addr);
 };
 
-#endif // MOTION_QT_ADDRESSBOOKPAGE_H
+#endif // SOV_QT_ADDRESSBOOKPAGE_H

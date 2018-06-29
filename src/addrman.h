@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_ADDRMAN_H
-#define MOTION_ADDRMAN_H
+#ifndef SOV_ADDRMAN_H
+#define SOV_ADDRMAN_H
 
 #include "netaddress.h"
 #include "protocol.h"
@@ -585,4 +585,4 @@ public:
 
 };
 
-#endif // MOTION_ADDRMAN_H
+#endif // SOV_ADDRMAN_H

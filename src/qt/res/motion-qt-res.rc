@@ -1,4 +1,4 @@
-IDI_ICON1 ICON DISCARDABLE "icons/motion.ico"
+IDI_ICON1 ICON DISCARDABLE "icons/sov.ico"
 
 #include <windows.h>             // needed for VERSIONINFO
 #include "../../clientversion.h" // holds the needed client version information
@@ -18,14 +18,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Motion"
-            VALUE "FileDescription",    "Motion Core (GUI node for Motion)"
+            VALUE "CompanyName",        "SOV"
+            VALUE "FileDescription",    "SOV Core (GUI node for SOV)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "motion-qt"
+            VALUE "InternalName",       "sov-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "motion-qt.exe"
-            VALUE "ProductName",        "Motion Core"
+            VALUE "OriginalFilename",   "sov-qt.exe"
+            VALUE "ProductName",        "SOV Core"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

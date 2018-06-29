@@ -5,10 +5,10 @@
 
 # Test mempool limiting together/eviction with the wallet
 
-from test_framework.test_framework import MotionTestFramework
+from test_framework.test_framework import SOVTestFramework
 from test_framework.util import *
 
-class MempoolLimitTest(MotionTestFramework):
+class MempoolLimitTest(SOVTestFramework):
 
     def __init__(self):
         self.txouts = gen_return_txouts()

@@ -21,8 +21,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef MOTION_BIP39_H
-#define MOTION_BIP39_H
+#ifndef SOV_BIP39_H
+#define SOV_BIP39_H
 
 #include "support/allocators/secure.h"
 

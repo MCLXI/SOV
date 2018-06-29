@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef MOTION_QT_EDITADDRESSDIALOG_H
-#define MOTION_QT_EDITADDRESSDIALOG_H
+#ifndef SOV_QT_EDITADDRESSDIALOG_H
+#define SOV_QT_EDITADDRESSDIALOG_H
 
 #include <QDialog>
 
@@ -54,4 +54,4 @@ private:
     QString address;
 };
 
-#endif // MOTION_QT_EDITADDRESSDIALOG_H
+#endif // SOV_QT_EDITADDRESSDIALOG_H
