@@ -1233,17 +1233,34 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 {
     double dDiff;
 
-    if (!nPrevHeight && Params().NetworkIDString() != "test" || nPrevHeight <= 2) { // No Premine on testnet
-        return 350400 * COIN;
+    if (!nPrevHeight && Params().NetworkIDString() != "test" || nPrevHeight == 2) { // No Premine on testnet
+        return 850000 * COIN;
     }
 
     // Ninja Launch, first 500 blocks 1 SOV reward
-    if (nPrevHeight <= 300) {
+    if (nPrevHeight <= 2882) {
         return 1 * COIN;
-    }
-
+    } else if (nPrevHeight <= 12883) {
+	return 15 * COIN;
+       } else if (nPrevHeight <= 43203) {
+        return 20 * COIN;
+   } else if (nPrevHeight <= 129604) {
+        return 22.5 * COIN;
+   } else if (nPrevHeight <= 655205) {
+        return 25 * COIN;
+   } else if (nPrevHeight <= 741606) {
+        return 22.5 * COIN;
+   } else if (nPrevHeight <= 828007) {
+        return 20 * COIN;
+   } else if (nPrevHeight <= 914408) {
+        return 10 * COIN;
+   } else if (nPrevHeight <= 5354339) {
+        return 5 * COIN;
+   } else  {
+	return 0.0000001 * COIN;
+	}
     // Total supply 22,075,700
-    if (nPrevHeight >= 3154101) {
+    if (nPrevHeight >= 5354339) {
         return 0;
     }
 
