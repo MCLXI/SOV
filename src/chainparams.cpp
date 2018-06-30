@@ -147,7 +147,7 @@ public:
         pchMessageStart[2] = 0x5d;
         pchMessageStart[3] = 0x74;
         vAlertPubKey = ParseHex("048c4ef0c2c635687f6077a742be01a05748370a24a6d5209283d727e7825bf5b259256169f638e7f845c923abe6f3b3f64177f8dd354c447fbe2ad933f457febe");
-        nDefaultPort = 7979;
+        nDefaultPort = 11888;
         nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in sov
         nDelayGetHeadersTime = 24 * 60 * 60;
         nPruneAfterHeight = 100000;
@@ -198,7 +198,9 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("00000b1c1fc0400425ffb0d8ab4b27ae9736f8136ae3c51f2c1e6e1e514f2277"));
         assert(genesis.hashMerkleRoot == uint256S("999ad67d669569e6168d11f92cd4ee8a056a2a5754253164ec8fb9593f923267"));
 
-        //vSeeds.push_back(CDNSSeedData("sovproject.org", "seed.sovproject.org"));
+        vSeeds.push_back(CDNSSeedData("217.69.13.119", "217.69.13.119"));
+vSeeds.push_back(CDNSSeedData("45.76.189.173", "45.76.189.173"));
+vSeeds.push_back(CDNSSeedData("207.148.80.120", "207.148.80.120"));
         //vSeeds.push_back(CDNSSeedData("fixed-seeds.sovproject.org", "one.fixed-seeds.sovproject.org"));
         //vSeeds.push_back(CDNSSeedData("fixed-seeds.sovproject.org", "two.fixed-seeds.sovproject.org"));
         //vSeeds.push_back(CDNSSeedData("fixed-seeds.sovproject.org", "three.fixed-seeds.sovproject.org"));
